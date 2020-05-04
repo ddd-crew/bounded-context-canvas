@@ -69,6 +69,8 @@ To create loosely coupled systems it's essential to be wary of dependencies. In 
 
 - [Bounded Context Canvas V3: Simplifications and Additions](https://medium.com/nick-tune-tech-strategy-blog/bounded-context-canvas-v2-simplifications-and-additions-229ed35f825f)
 
+- [Extending the Bounded Context Canvas with BDD Examples](https://xebia.com/blog/extending-the-bounded-context-canvas-with-bdd-examples/)
+
 ## Contributors
 
 Thank you to the following individuals who have all contributed to the Bounded Context Canvas:
