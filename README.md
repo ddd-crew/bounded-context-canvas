@@ -2,7 +2,7 @@
 
 The Bounded Context Canvas is a collaborative tool for designing and documenting the design of a single bounded context.
 
-A bounded context is a sub-system in a software architecture aligned to a part of your domain ([Link to full definition])
+A [bounded context](https://martinfowler.com/bliki/BoundedContext.html) is a sub-system in a software architecture aligned to a part of your domain.
 
 The canvas guides you through the process of designing a bounded context by requiring you to consider and make choices about the key elements of its design, from naming to responsibilities, to its public interface and dependencies.
 
