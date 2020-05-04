@@ -22,12 +22,12 @@ Here is a short explanation of each section of the canvas.
 Naming is hard. Writing down the name of your context and gaining agreement as a team will frame how you design the context.
 
 ### Description
-A few sentences describing the why and what of the context in business language. No technical details heres.
+A few sentences describing the why and what of the context in business language. No technical details here.
 
 Writing down the description forces you to clearly articulate fuzzy thoughts and ensure everybody in the team is on the same page.
 
 ### Strategic Classification
-How important is this context to the success of your organisation? Is it: 
+How important is this context to the success of your organisation: 
 
 - core domain: a key strategic initiative
 - supporting domain: necessary but not a differentiator
@@ -37,7 +37,7 @@ What role does the context play in your business model:
 
 - revenue generator: people pay directly for this
 - engagement creator: users like it but they don't pay for it
-- compliance enforcer: ensures laws and legislations are not broken
+- compliance enforcer: protects your business reputation and existence
 
 How evolved is the concept (see [Wardley Maps](https://medium.com/wardleymaps)):
 
@@ -88,7 +88,7 @@ The Bounded Context Canvas is freely available for you to use. In addition, your
 
 Feel free to also send us a pull request with your examples.
 
-Shield: [![CC BY 4.0][cc-by-shield]][cc-by]
+[![CC BY 4.0][cc-by-shield]][cc-by]
 
 This work is licensed under a [Creative Commons Attribution 4.0 International
 License][cc-by].
