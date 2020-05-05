@@ -57,7 +57,7 @@ How can you characterise the behaviour of this bounded context? Does it receive 
 
 Think about the best way to describe your context's behaviour, but do not specify architectural patterns here.
 
-Check out [Alberto Brandolini's ideas](http://cyrille.martraire.com/2012/09/collaborative-construction-by-alberto-brandolini/) for inspiration.
+Check out [Model Traits worksheet](resources/model-traits-worksheet.md) or  [Alberto Brandolini's ideas](http://cyrille.martraire.com/2012/09/collaborative-construction-by-alberto-brandolini/) for inspiration.
 
 ### Messages Consumed and Produced
 What is the public interface or the contract of your bounded context? Which messages come in and which does it send out?
