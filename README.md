@@ -65,6 +65,15 @@ What is the public interface or the contract of your bounded context? Which mess
 ### Dependencies and Relationships
 To create loosely coupled systems it's essential to be wary of dependencies. In this section you should write the name of each dependency and a short explanation of why the dependency exists.
 
+## Tools
+Here are some tools that can hel you to use the Bounded Context Canvas.
+
+### HTML Version
+A [HTML version of the canvas](tools/html-version/instructions.md) you can edit in a browser and version in source control alongside your code. Contributed by [Nelson da Costa](https://github.com/baruica).
+
+### Miro Version
+An [interactive Miro whiteboard](https://github.com/ddd-crew/virtual-modelling-templates#strategic-ddd-miro-template) containing the Bounded Context Canvas and other DDD tools for collaborative modelling.
+
 ## Additional Resources
 
 - [Bounded Context Canvas V3: Simplifications and Additions](https://medium.com/nick-tune-tech-strategy-blog/bounded-context-canvas-v2-simplifications-and-additions-229ed35f825f)
@@ -79,6 +88,7 @@ Thank you to the following individuals who have all contributed to the Bounded C
 - [Kenny Baas](https://github.com/Baasie)
 - [Kim Lindhard](https://github.com/kim-lindhard-dfds)
 - [Michael Plöd](https://github.com/mploed)
+- [Nelson da Costa](https://github.com/baruica)
 - [Maxime Sanglan-Charlier](https://twitter.com/__maxs__)
 - [Nick Tune](https://github.com/ntcoding)
 
