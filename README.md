@@ -74,6 +74,9 @@ A [HTML version of the canvas](tools/html-version/instructions.md) you can edit 
 ### Miro Version
 An [interactive Miro whiteboard](https://github.com/ddd-crew/virtual-modelling-templates#strategic-ddd-miro-template) containing the Bounded Context Canvas and other DDD tools for collaborative modelling.
 
+### draw.io Version
+A [draw.io template of the canvas](tools/drawio-svg-version/instructions.md) containing the Bounded Context Canvas as template.
+
 ## Additional Resources
 
 - [Bounded Context Canvas V3: Simplifications and Additions](https://medium.com/nick-tune-tech-strategy-blog/bounded-context-canvas-v2-simplifications-and-additions-229ed35f825f)
