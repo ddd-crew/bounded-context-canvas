@@ -85,15 +85,12 @@ A [draw.io template of the canvas](tools/drawio-svg-version/instructions.md) con
 
 ## Contributors
 
-Thank you to the following individuals who have all contributed to the Bounded Context Canvas:
+Thank you to all [existing and future contributors](https://github.com/ddd-crew/bounded-context-canvas/graphs/contributors) and to the following individuals who have all contributed to the Bounded Context Canvas:
 
-- [Kacper Gunia](https://github.com/cakper)
 - [Kenny Baas](https://github.com/Baasie)
 - [Kim Lindhard](https://github.com/kim-lindhard-dfds)
 - [Michael Plöd](https://github.com/mploed)
-- [Nelson da Costa](https://github.com/baruica)
 - [Maxime Sanglan-Charlier](https://twitter.com/__maxs__)
-- [Nick Tune](https://github.com/ntcoding)
 
 A significant contribution to the Bounded Context Canvas was the inspiration of the [Business Model Canvas](https://www.strategyzer.com/canvas/business-model-canvas).
 
