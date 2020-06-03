@@ -74,6 +74,9 @@ A [HTML version of the canvas](tools/html-version/instructions.md) you can edit 
 ### Miro Version
 An [interactive Miro whiteboard](https://github.com/ddd-crew/virtual-modelling-templates#strategic-ddd-miro-template) containing the Bounded Context Canvas and other DDD tools for collaborative modelling.
 
+### draw.io Version
+A [draw.io template of the canvas](tools/drawio-svg-version/instructions.md) containing the Bounded Context Canvas as template.
+
 ## Additional Resources
 
 - [Bounded Context Canvas V3: Simplifications and Additions](https://medium.com/nick-tune-tech-strategy-blog/bounded-context-canvas-v2-simplifications-and-additions-229ed35f825f)
@@ -82,15 +85,12 @@ An [interactive Miro whiteboard](https://github.com/ddd-crew/virtual-modelling-t
 
 ## Contributors
 
-Thank you to the following individuals who have all contributed to the Bounded Context Canvas:
+Thank you to all [existing and future contributors](https://github.com/ddd-crew/bounded-context-canvas/graphs/contributors) and to the following individuals who have all contributed to the Bounded Context Canvas:
 
-- [Kacper Gunia](https://github.com/cakper)
 - [Kenny Baas](https://github.com/Baasie)
 - [Kim Lindhard](https://github.com/kim-lindhard-dfds)
 - [Michael Plöd](https://github.com/mploed)
-- [Nelson da Costa](https://github.com/baruica)
 - [Maxime Sanglan-Charlier](https://twitter.com/__maxs__)
-- [Nick Tune](https://github.com/ntcoding)
 
 A significant contribution to the Bounded Context Canvas was the inspiration of the [Business Model Canvas](https://www.strategyzer.com/canvas/business-model-canvas).
 
