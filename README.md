@@ -10,7 +10,7 @@ The canvas guides you through the process of designing a bounded context by requ
 
 ## How to Use
 
-There is no strict rule about the order in which you should fill out the canvas, however, in general it is recommended to start at the top left with the name, move down the left column and then start at the top of the right column.
+Start with the name and description of the canvas to clarify it's reason for existing and key responsibilities in a sentence or two. Then you can fill in the other sections of the canvas in any order. You could design outside-in starting with inbound communication or inside out starting with the business rules and domain language.
 
 You may not have all the information you need to complete certain sections of the canvas. In such a case, you'll need to use other modelling techniques to find the information you require. See [DDD Toolbox](https://github.com/ddd-crew/ddd-toolbox) for suggestions.
 
@@ -27,7 +27,7 @@ A few sentences describing the why and what of the context in business language.
 Writing down the description forces you to clearly articulate fuzzy thoughts and ensure everybody in the team is on the same page.
 
 ### Strategic Classification
-How important is this context to the success of your organisation: 
+How important is this context to the success of your organisation?: 
 
 - core domain: a key strategic initiative
 - supporting domain: necessary but not a differentiator
@@ -44,26 +44,50 @@ How evolved is the concept (see [Wardley Maps](https://medium.com/wardleymaps)):
 - genesis: new unexplored domain
 - custom built: companies are building their own versions
 - product: off-the-shelf versions exist with differentiation
-- commodity: highly-standardised versions exist 
+- commodity: highly-standardised versions exist
 
-### Business Decisions
-What are the key business rules and policies within this context?
+For help filling in this section of the canvas, see [Core Domain Charts](https://github.com/ddd-crew/core-domain-charts).
+
+### Domain Roles
+How can you characterise the behaviour of this bounded context? Does it receive high volumes of data and crunch them into insights - an analysis context? Or does it enforce a workflow - an execution context? Identifying the different roles a context plays can help to avoid coupling responsibilities.
+
+Check out Alberto Brandolini's [Bounded Context Archetypes](http://cyrille.martraire.com/2012/09/collaborative-construction-by-alberto-brandolini/) and Rebecca Wirfs-Brock's [Object Role Stereotypes](http://www.wirfs-brock.com/PDFs/A_Brief-Tour-of-RDD.pdf) for a deeper analysis of this space. The [Model Traits worksheet](resources/model-traits-worksheet.md) contains community-generated examples of roles (model traits was the former name for domain roles).
+
+### Inbound Communication
+
+Inbound communication represents collaborations that are initiated by other collaborators.
+
+#### Messages
+
+Messages are the information that one collaborator sends to be another. There are three types of conversation that can occur between bounded contexts. A request to do something (a command), a request for some information (a query), or notification that something has happened (an event).
+
+The words message is used in the general sense and not tied to any implementation. No message bus or asynchronous workflow is mandated is obligatory. A command, for example, could simply be posting data from an HTML form as a HTTP POST command.
+
+#### Collaborators
+
+Collaborators are other systems or sub-systems that send messages to this context. They can be other bounded contexts, frontends (web or mobile), other bounded contexts or even something else.
+
+![Collaborator types](resources/collaborator-types.jpeg)
+
+#### Relationship Type
+
+The relationship type between two bounded contexts indicates how the models and teams influence each other. See [Context Mappping](https://github.com/ddd-crew/context-mapping) to learn about relationship types.
+
+#### Organising Into Swimlanes
+
+Collaborators can be organised into horizontal swim lanes showing the messages that they send.
+
+![Collaborator example](resources/collaborator-example.jpeg)
+
+### Outbound Communication
+
+Outbound communication represents collaborations that are initiated by this context to interact with other collaborators. The same message types and notations apply as inbound communication.
 
 ### Ubiquitous Language
 What are the key domain terms that exist within this context, and what do they mean?
 
-### Model Traits
-How can you characterise the behaviour of this bounded context? Does it receive high volumes of data and crunch them into insights - an analysis context. Or does it enforce a workflow - an execution context.
-
-Think about the best way to describe your context's behaviour, but do not specify architectural patterns here.
-
-Check out [Model Traits worksheet](resources/model-traits-worksheet.md) or  [Alberto Brandolini's ideas](http://cyrille.martraire.com/2012/09/collaborative-construction-by-alberto-brandolini/) for inspiration.
-
-### Messages Consumed and Produced
-What is the public interface or the contract of your bounded context? Which messages come in and which does it send out?
-
-### Dependencies and Relationships
-To create loosely coupled systems it's essential to be wary of dependencies. In this section you should write the name of each dependency and a short explanation of why the dependency exists.
+### Business Decisions
+What are the key business rules and policies within this context?
 
 ## Tools
 Here are some tools that can hel you to use the Bounded Context Canvas.
