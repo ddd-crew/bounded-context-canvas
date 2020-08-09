@@ -6,7 +6,7 @@ A [bounded context](https://martinfowler.com/bliki/BoundedContext.html) is a sub
 
 The canvas guides you through the process of designing a bounded context by requiring you to consider and make choices about the key elements of its design, from naming to responsibilities, to its public interface and dependencies.
 
-![alt text](resources/bounded-context-canvas-v3.jpeg "The Bounded Context Canvas V3")
+![alt text](resources/bounded-context-canvas-v4.jpeg "The Bounded Context Canvas V4")
 
 ## How to Use
 
