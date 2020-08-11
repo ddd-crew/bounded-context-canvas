@@ -48,6 +48,8 @@ How evolved is the concept (see [Wardley Maps](https://medium.com/wardleymaps)):
 - product: off-the-shelf versions exist with differentiation
 - commodity: highly-standardised versions exist
 
+> For detailed descriptions of genesis, custom built, product, and commodity see [Wardley Maps Evolution definitions](https://twitter.com/swardley/status/989211014485901316/photo/1).
+
 For help filling in this section of the canvas, see [Core Domain Charts](https://github.com/ddd-crew/core-domain-charts).
 
 ### Domain Roles
