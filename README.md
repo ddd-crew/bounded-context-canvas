@@ -10,7 +10,9 @@ The canvas guides you through the process of designing a bounded context by requ
 
 ## How to Use
 
-Start with the name and description of the canvas to clarify it's reason for existing and key responsibilities in a sentence or two. Then you can fill in the other sections of the canvas in any order. You could design outside-in starting with inbound communication or inside out starting with the business rules and domain language.
+>To quickly get started with the Bounded Context Canvas, complete the canvas in the order the sections are presented in [Section Definitions](#section-definitions)
+
+Start with the name and description of the canvas to clarify its reason for existing and key responsibilities in a sentence or two. Then you can fill in the other sections of the canvas in any order. You could design outside-in starting with inbound communication or inside out starting with the business rules and domain language.
 
 You may not have all the information you need to complete certain sections of the canvas. In such a case, you'll need to use other modelling techniques to find the information you require. See [DDD Toolbox](https://github.com/ddd-crew/ddd-toolbox) for suggestions.
 
@@ -61,11 +63,11 @@ Inbound communication represents collaborations that are initiated by other coll
 
 Messages are the information that one collaborator sends to be another. There are three types of conversation that can occur between bounded contexts. A request to do something (a command), a request for some information (a query), or notification that something has happened (an event).
 
-The words message is used in the general sense and not tied to any implementation. No message bus or asynchronous workflow is mandated is obligatory. A command, for example, could simply be posting data from an HTML form as a HTTP POST command.
+The word message is used in the general sense and not tied to any implementation. No message bus or asynchronous workflow is obligatory. A command, for example, could simply be posting data from an HTML form as a HTTP POST command.
 
 #### Collaborators
 
-Collaborators are other systems or sub-systems that send messages to this context. They can be other bounded contexts, frontends (web or mobile), other bounded contexts or even something else.
+Collaborators are other systems or sub-systems that send messages to this context. They can be other bounded contexts, frontends (web or mobile), or something else.
 
 ![Collaborator types](resources/collaborator-types.jpeg)
 
