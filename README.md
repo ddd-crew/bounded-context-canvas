@@ -8,6 +8,8 @@ The canvas guides you through the process of designing a bounded context by requ
 
 ![alt text](resources/bounded-context-canvas-v4.jpeg "The Bounded Context Canvas V4")
 
+Download the [blank canvas template](resources/bounded-context-canvas-4v-blank.jpeg).
+
 ## How to Use
 
 >To quickly get started with the Bounded Context Canvas, complete the canvas in the order the sections are presented in [Section Definitions](#section-definitions)
