@@ -16,6 +16,7 @@ The *bounded context canvas* is described in [this blog post](https://medium.com
 
 Besides the website, there are several options available to use draw.io:
 
+- [Download Draw.io](https://github.com/jgraph/drawio-desktop/releases)
 - [draw.io Diagrams for Confluence](https://marketplace.atlassian.com/apps/1210933/draw-io-diagrams-for-confluence)
 - [Use draw.io diagrams in Google Docs](https://drawio-app.com/use-draw-io-diagrams-in-google-docs/)
 - Visual Studio Code
