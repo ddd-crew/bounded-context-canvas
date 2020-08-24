@@ -107,6 +107,12 @@ An [interactive Miro whiteboard](https://github.com/ddd-crew/virtual-modelling-t
 ### draw.io Version
 A [draw.io template of the canvas](tools/drawio-svg-version/instructions.md) containing the Bounded Context Canvas as template.
 
+## Design Tips
+
+By making the important elements of a bounded context's design visible on the canvas, you can more easily challenge and improve the design. Here are some tips you can use with the Bounded Context Canvas to critique the design of a bounded context.
+
+![Bounded Context Canvas Design Critique Tips](/resources/bounded-context-canvas-design-critique-tips.jpg)
+
 ## Additional Resources
 
 - [Bounded Context Canvas V3: Simplifications and Additions](https://medium.com/nick-tune-tech-strategy-blog/bounded-context-canvas-v2-simplifications-and-additions-229ed35f825f)
