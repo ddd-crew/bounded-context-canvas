@@ -107,6 +107,27 @@ An [interactive Miro whiteboard](https://github.com/ddd-crew/virtual-modelling-t
 ### draw.io Version
 A [draw.io template of the canvas](tools/drawio-svg-version/instructions.md) containing the Bounded Context Canvas as template.
 
+## Design Tips
+
+By making the important elements of a bounded context's design visible on the canvas, you can more easily challenge and improve the design. Here are some tips help you challenge and improve a design.
+
+> Please feel free to create a Pull Request sharing your tips.
+
+### General Tips
+
+1. Experiment by moving something on the canvas to another context. How is the design affected?
+
+### Interface Design Tips
+
+The public interface of a bounded context is its contract with the rest of the system. Contracts have a big impact on collaborators and are hard to change, so good design is vital. Here are some tips to help you critique the design of a bounded context's interface.
+
+1. Are the names of messages coherent with each other and the description of the context?
+2. Is each message type optimal (e.g. should a command be an event)?
+3. Is the interface too big (too many unique message types)?
+4. Is the context exposing too much of its internals?
+5. Do any messages seem like they should belong elsewhere?
+
+
 ## Additional Resources
 
 - [Bounded Context Canvas V3: Simplifications and Additions](https://medium.com/nick-tune-tech-strategy-blog/bounded-context-canvas-v2-simplifications-and-additions-229ed35f825f)
