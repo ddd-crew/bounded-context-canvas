@@ -73,6 +73,8 @@ The word message is used in the general sense and not tied to any implementation
 
 Collaborators are other systems or sub-systems that send messages to this context. They can be other bounded contexts, frontends (web or mobile), or something else.
 
+If the Bounded Context owns the user interface (e.g. [micro-frontend](https://martinfowler.com/articles/micro-frontends.html)) then the collaborator type is direct user interaction.
+
 ![Collaborator types](resources/collaborator-types.jpeg)
 
 #### Relationship Type
