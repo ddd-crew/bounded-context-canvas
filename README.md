@@ -96,7 +96,7 @@ What are the key domain terms that exist within this context, and what do they m
 What are the key business rules and policies within this context?
 
 ## Tools
-Here are some tools that can hel you to use the Bounded Context Canvas.
+Here are some tools that can help you to use the Bounded Context Canvas.
 
 ### HTML Version
 A [HTML version of the canvas](tools/html-version/instructions.md) you can edit in a browser and version in source control alongside your code. Contributed by [Nelson da Costa](https://github.com/baruica).
