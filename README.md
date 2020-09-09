@@ -102,7 +102,7 @@ Here are some tools that can hel you to use the Bounded Context Canvas.
 A [HTML version of the canvas](tools/html-version/instructions.md) you can edit in a browser and version in source control alongside your code. Contributed by [Nelson da Costa](https://github.com/baruica).
 
 ### Miro Version
-A free [MiroHQ](https://miro.com/miroverse/category/newly-added/the-bounded-context-canvas) template of the Bounded Context Canvas.
+A free [MiroHQ template](https://miro.com/miroverse/category/newly-added/the-bounded-context-canvas) of the Bounded Context Canvas.
 
 ### draw.io Version
 A [draw.io template of the canvas](tools/drawio-svg-version/instructions.md) containing the Bounded Context Canvas as template.
