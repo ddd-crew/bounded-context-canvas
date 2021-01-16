@@ -16,7 +16,7 @@ Download the [blank canvas template](resources/bounded-context-canvas-4v-blank.j
 
 Start with the name and description of the canvas to clarify its reason for existing and key responsibilities in a sentence or two. Then you can fill in the other sections of the canvas in any order. You could design outside-in starting with inbound communication or inside out starting with the business rules and domain language.
 
-You may not have all the information you need to complete certain sections of the canvas. In such a case, you'll need to use other modelling techniques to find the information you require. See [DDD Toolbox](https://github.com/ddd-crew/ddd-toolbox) for suggestions.
+You may not have all the information you need to complete certain sections of the canvas. In such a case, you'll need to use other modelling techniques to find the information you require.
 
 ### Alternative Formats
 
