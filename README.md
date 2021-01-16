@@ -18,6 +18,12 @@ Start with the name and description of the canvas to clarify its reason for exis
 
 You may not have all the information you need to complete certain sections of the canvas. In such a case, you'll need to use other modelling techniques to find the information you require. See [DDD Toolbox](https://github.com/ddd-crew/ddd-toolbox) for suggestions.
 
+### Alternative Formats
+
+The default Bounded Context Canvas format shown above is not the only format, below are others. Feel free to also experiment with new and novel formats.
+
+- [Use Case Swimlanes](https://medium.com/nick-tune-tech-strategy-blog/bounded-context-canvas-recipe-use-case-swimlanes-11ca647175d3): This style organizes the communication section into swimlanes showing the sequence in which interactions occur using the format: *message in* -> *decision(s) made* -> *message(s) out*
+
 ## Section Definitions
 
 Here is a short explanation of each section of the canvas.
