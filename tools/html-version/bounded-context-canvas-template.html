@@ -14,7 +14,7 @@
     </head>
     <body>
         <header>
-            <h1>Bounded Context Canvas (v3)</h1>
+            <h1>Bounded Context Canvas (v4)</h1>
         </header>
         <main class="container-fluid">
             <form>
@@ -86,127 +86,243 @@
                                 </div>
                             </div>
                         </div>
-                        <hr/>
-                        <div class="form-group">
-                            <label for="business-decisions" class="font-weight-bolder">Business Decisions</label>
-                            <textarea tabindex="6" class="form-control" id="business-decisions" rows="5" aria-describedby="business-decisions-help"></textarea>
-                            <small id="business-decisions-help" class="form-text text-muted">Key business rules, policies and decisions</small>
-                        </div>
-                        <hr/>
-                        <div class="form-group">
-                            <label for="ubuquitous-language" class="font-weight-bolder">Ubiquitous Language</label>
-                            <textarea tabindex="7" class="form-control" id="ubuquitous-language" rows="5" aria-describedby="ubiquitous-language-help"></textarea>
-                            <small id="ubiquitous-language-help" class="form-text text-muted">Key domain terminology</small>
-                        </div>
-                    </div>
-                    <div class="col">
+                        
                         <div class="form-group">
                             <label for="model-traits" class="font-weight-bolder">Model traits</label>
                             <input tabindex="8" type="text" class="form-control" id="model-traits" aria-describedby="model-traits-help">
                             <small id="model-traits-help" class="form-text text-muted">draft, execute, audit, enforcer, interchange, gateway, etc.</small>
                         </div>
-                        <hr/>
-                        <div>
-                            <p class="font-weight-bolder">Messages Consumed and Produced</p>
-                            <div class="row">
-                                <div class="col border-right">
-                                    <p class="text-center">Messages Consumed</p>
-                                    <div class="form-group">
-                                        <label for="commands-handled">Commands handled</label>
-                                        <textarea tabindex="9" class="form-control text-monospace" id="commands-handled" rows="3"></textarea>
+                    
+                    </div>
+                </div>                
+                <hr/> 
+                <div class="row">
+                    <div class="col">
+                        <div class="col border-right">
+                            <p class="text-center font-weight-bolder">Inbound Communication</p>
+                            <div class="form-group">                                
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Collaborator</label>
+                                            <input tabindex="15" type="text" class="form-control" id="supplier-relationship-name-1">
+                                            <input tabindex="17" type="text" class="form-control" id="supplier-relationship-name-2">
+                                            <input tabindex="19" type="text" class="form-control" id="supplier-relationship-name-3">
+                                            
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="commands-handled">Events handled</label>
-                                        <textarea tabindex="10" class="form-control text-monospace" id="events-handled" rows="3"></textarea>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Relationship</label>
+                                            <input tabindex="16" type="text" class="form-control" id="supplier-relationship-1">
+                                            <input tabindex="18" type="text" class="form-control" id="supplier-relationship-2">
+                                            <input tabindex="20" type="text" class="form-control" id="supplier-relationship-3">
+                                            
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="commands-handled">Queries handled</label>
-                                        <textarea tabindex="11" class="form-control text-monospace" id="queries-handled" rows="3"></textarea>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Command</label>
+                                            <input tabindex="16" type="text" class="form-control" id="supplier-command-1">
+                                            <input tabindex="18" type="text" class="form-control" id="supplier-command-2">
+                                            <input tabindex="20" type="text" class="form-control" id="supplier-command-3">
+                                            
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col">
-                                    <p class="text-center">Messages Produced</p>
-                                    <div class="form-group">
-                                        <label for="commands-sent">Commands sent</label>
-                                        <textarea tabindex="12" class="form-control text-monospace" id="commands-sent" rows="3"></textarea>
+                                </div>                                
+                            </div>    
+                            
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Collaborator</label>
+                                            <input tabindex="15" type="text" class="form-control" id="supplier-relationship-name-1">
+                                            <input tabindex="17" type="text" class="form-control" id="supplier-relationship-name-2">
+                                            <input tabindex="19" type="text" class="form-control" id="supplier-relationship-name-3">
+                                            
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="events-published">Events published</label>
-                                        <textarea tabindex="13" class="form-control text-monospace" id="events-published" rows="3"></textarea>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Relationship</label>
+                                            <input tabindex="16" type="text" class="form-control" id="supplier-relationship-1">
+                                            <input tabindex="18" type="text" class="form-control" id="supplier-relationship-2">
+                                            <input tabindex="20" type="text" class="form-control" id="supplier-relationship-3">
+                                            
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="queries-invoked">Queries invoked</label>
-                                        <textarea tabindex="14" class="form-control text-monospace" id="queries-invoked" rows="3"></textarea>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Event</label>
+                                            <input tabindex="16" type="text" class="form-control" id="supplier-event-1">
+                                            <input tabindex="18" type="text" class="form-control" id="supplier-event-2">
+                                            <input tabindex="20" type="text" class="form-control" id="supplier-event-3">
+                                            
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
+                                </div>                                
+                            </div>   
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Collaborator</label>
+                                            <input tabindex="15" type="text" class="form-control" id="supplier-relationship-name-1">
+                                            <input tabindex="17" type="text" class="form-control" id="supplier-relationship-name-2">
+                                            <input tabindex="19" type="text" class="form-control" id="supplier-relationship-name-3">
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Relationship</label>
+                                            <input tabindex="16" type="text" class="form-control" id="supplier-relationship-1">
+                                            <input tabindex="18" type="text" class="form-control" id="supplier-relationship-2">
+                                            <input tabindex="20" type="text" class="form-control" id="supplier-relationship-3">
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Query</label>
+                                            <input tabindex="16" type="text" class="form-control" id="supplier-query-1">
+                                            <input tabindex="18" type="text" class="form-control" id="supplier-query-2">
+                                            <input tabindex="20" type="text" class="form-control" id="supplier-query-3">
+                                            
+                                        </div>
+                                    </div>
+                                </div>                                
+                            </div>                            
                         </div>
-                        <hr/>
-                        <div>
-                            <p class="font-weight-bolder">Dependencies and Relationships</p>
-                            <div class="row">
-                                <div class="col border-right">
-                                    <p class="text-center">Message Suppliers</p>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label>Name</label>
-                                                <input tabindex="15" type="text" class="form-control" id="supplier-relationship-name-1">
-                                                <input tabindex="17" type="text" class="form-control" id="supplier-relationship-name-2">
-                                                <input tabindex="19" type="text" class="form-control" id="supplier-relationship-name-3">
-                                                <input tabindex="21" type="text" class="form-control" id="supplier-relationship-name-4">
-                                                <input tabindex="23" type="text" class="form-control" id="supplier-relationship-name-5">
-                                            </div>
+                    </div>
+
+                    <div class="col border-right">  
+                        <div class="form-group">
+                            <label for="ubuquitous-language" class="font-weight-bolder">Ubiquitous Language</label>
+                            </p>
+                            <textarea tabindex="7" class="form-control" id="ubuquitous-language" rows="5" aria-describedby="ubiquitous-language-help"></textarea>
+                            <small id="ubiquitous-language-help" class="form-text text-muted">Key domain terminology</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="business-decisions" class="font-weight-bolder">Business Decisions</label>
+                            </p>  
+                            <textarea tabindex="6" class="form-control" id="business-decisions" rows="5" aria-describedby="business-decisions-help"></textarea>
+                            <small id="business-decisions-help" class="form-text text-muted">Key business rules, policies and decisions</small>
+                        </div>
+                        <hr/>                        
+                    </div>
+
+                    <div class="col">
+                        <div class="col border-right">
+                            <p class="text-center font-weight-bolder">Outbound Communication</p>
+                            <div class="form-group">                                
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Command</label>
+                                            <input tabindex="16" type="text" class="form-control" id="supplier-command-1">
+                                            <input tabindex="18" type="text" class="form-control" id="supplier-command-2">
+                                            <input tabindex="20" type="text" class="form-control" id="supplier-command-3">
+                                            
                                         </div>
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label>Relationship</label>
-                                                <input tabindex="16" type="text" class="form-control" id="supplier-relationship-1">
-                                                <input tabindex="18" type="text" class="form-control" id="supplier-relationship-2">
-                                                <input tabindex="20" type="text" class="form-control" id="supplier-relationship-3">
-                                                <input tabindex="22" type="text" class="form-control" id="supplier-relationship-4">
-                                                <input tabindex="24" type="text" class="form-control" id="supplier-relationship-5">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <p class="text-center">Message Consumers</p>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label>Name</label>
-                                                <input tabindex="25" type="text" class="form-control" id="consumer-relationship-name-1">
-                                                <input tabindex="27" type="text" class="form-control" id="consumer-relationship-name-2">
-                                                <input tabindex="29" type="text" class="form-control" id="consumer-relationship-name-3">
-                                                <input tabindex="31" type="text" class="form-control" id="consumer-relationship-name-4">
-                                                <input tabindex="33" type="text" class="form-control" id="consumer-relationship-name-5">
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label>Relationship</label>
-                                                <input tabindex="26" type="text" class="form-control" id="consumer-relationship-1">
-                                                <input tabindex="28" type="text" class="form-control" id="consumer-relationship-2">
-                                                <input tabindex="30" type="text" class="form-control" id="consumer-relationship-3">
-                                                <input tabindex="32" type="text" class="form-control" id="consumer-relationship-4">
-                                                <input tabindex="34" type="text" class="form-control" id="consumer-relationship-5">
-                                            </div>
+                                    </div>                                    
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Relationship</label>
+                                            <input tabindex="16" type="text" class="form-control" id="supplier-relationship-1">
+                                            <input tabindex="18" type="text" class="form-control" id="supplier-relationship-2">
+                                            <input tabindex="20" type="text" class="form-control" id="supplier-relationship-3">
+                                            
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <small id="dependenciesHelp" class="form-text text-muted">Relationship : mutually dependant, upstream/downstream, indepedant</small>
-                            <small id="relationships-help" class="form-text text-muted">ACL: Anti-Corruption Layer - OHS: Open Host Service - PL: Published Language</small>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Collaborator</label>
+                                            <input tabindex="15" type="text" class="form-control" id="supplier-relationship-name-1">
+                                            <input tabindex="17" type="text" class="form-control" id="supplier-relationship-name-2">
+                                            <input tabindex="19" type="text" class="form-control" id="supplier-relationship-name-3">
+                                            
+                                        </div>
+                                    </div>
+                                </div>                                
+                            </div>    
+                            
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Event</label>
+                                            <input tabindex="16" type="text" class="form-control" id="supplier-event-1">
+                                            <input tabindex="18" type="text" class="form-control" id="supplier-event-2">
+                                            <input tabindex="20" type="text" class="form-control" id="supplier-event-3">
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Relationship</label>
+                                            <input tabindex="16" type="text" class="form-control" id="supplier-relationship-1">
+                                            <input tabindex="18" type="text" class="form-control" id="supplier-relationship-2">
+                                            <input tabindex="20" type="text" class="form-control" id="supplier-relationship-3">
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Collaborator</label>
+                                            <input tabindex="15" type="text" class="form-control" id="supplier-relationship-name-1">
+                                            <input tabindex="17" type="text" class="form-control" id="supplier-relationship-name-2">
+                                            <input tabindex="19" type="text" class="form-control" id="supplier-relationship-name-3">
+                                            
+                                        </div>
+                                    </div>
+                                </div>                                
+                            </div>   
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Query</label>
+                                            <input tabindex="16" type="text" class="form-control" id="supplier-query-1">
+                                            <input tabindex="18" type="text" class="form-control" id="supplier-query-2">
+                                            <input tabindex="20" type="text" class="form-control" id="supplier-query-3">
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Relationship</label>
+                                            <input tabindex="16" type="text" class="form-control" id="supplier-relationship-1">
+                                            <input tabindex="18" type="text" class="form-control" id="supplier-relationship-2">
+                                            <input tabindex="20" type="text" class="form-control" id="supplier-relationship-3">
+                                            
+                                        </div>
+                                    </div>                                    
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Collaborator</label>
+                                            <input tabindex="15" type="text" class="form-control" id="supplier-relationship-name-1">
+                                            <input tabindex="17" type="text" class="form-control" id="supplier-relationship-name-2">
+                                            <input tabindex="19" type="text" class="form-control" id="supplier-relationship-name-3">
+                                            
+                                        </div>
+                                    </div>
+                                </div>                                
+                            </div>                            
                         </div>
                     </div>
                 </div>
+                <hr/>                
             </form>
         </main>
         <footer>
+            <small id="dependenciesHelp" class="form-text text-muted">Relationship : mutually dependant, upstream/downstream, indepedant</small>
+            <small id="relationships-help" class="form-text text-muted">ACL: Anti-Corruption Layer - OHS: Open Host Service - PL: Published Language</small>
             <article>
                 <section>
-                    <p>Source <a tabindex="35" href="https://medium.com/nick-tune-tech-strategy-blog/bounded-context-canvas-v2-simplifications-and-additions-229ed35f825f" target="-blank" rel="noopener noreferrer">Nick Tune - Modelling Bounded Contexts with the Bounded Context Canvas: A Workshop Recipe</a></p>
+                    <p>Source and Documentation<a tabindex="35" href="https://github.com/ddd-crew/bounded-context-canvas" target="-blank" rel="noopener noreferrer">DDD Crew on GitHub: Bounded Context Canvas</a></p>
+                    
                 </section>
             </article>
         </footer>
