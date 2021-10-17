@@ -103,6 +103,10 @@ What are the key domain terms that exist within this context, and what do they m
 ### Business Decisions
 What are the key business rules and policies within this context?
 
+## Example
+Below a filled-in version of the Bounded Context Canvas.
+![BCExample](resources/BCCanvasExample.jpg)
+
 ## Tools
 Here are some tools that can help you to use the Bounded Context Canvas.
 
