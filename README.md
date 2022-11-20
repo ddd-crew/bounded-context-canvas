@@ -106,11 +106,11 @@ What are the key domain terms that exist within this context, and what do they m
 What are the key business rules and policies within this context?
 
 ### Assumptions
-You will never make design decisions having a full knowledge about everything in your domain. Most design happes based on assumptions and it is highly recommended to make them explicit. This can be done in this section of the Bounded Context Design Canvas.
+You will never make design decisions having a full knowledge about everything in your domain. Most design happens based on assumptions and it is highly recommended to make them explicit. This can be done in this section of the Bounded Context Design Canvas.
 
 ### Verification Metrics 
 Domain Driven Design is about an iterative approach towards modelling and design based on continuous learning. Metrcis can help you
-gathering valuable input for those learnings (think about build-measure-learn). Think about mertics that you and your team can define in order to gather learnings if the chosen boundaries of your bounded context are a good fit or not. 
+gathering valuable input for those learnings (think about build-measure-learn). Think about metrics that you and your team can define in order to gather learnings if the chosen boundaries of your bounded context are a good fit or not. 
 
 You can collect those metrics for instance from:
 
