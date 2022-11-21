@@ -164,6 +164,10 @@ The public interface of a bounded context is its contract with the rest of the s
 
 - [Extending the Bounded Context Canvas with BDD Examples](https://xebia.com/blog/extending-the-bounded-context-canvas-with-bdd-examples/)
 
+## Translations
+
+All resources are available [in French](translations/fr/resources)
+
 ## Contributors
 
 Thank you to all [existing and future contributors](https://github.com/ddd-crew/bounded-context-canvas/graphs/contributors) and to the following individuals who have all contributed to the Bounded Context Canvas:
