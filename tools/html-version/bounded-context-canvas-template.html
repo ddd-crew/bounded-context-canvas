@@ -14,7 +14,7 @@
     </head>
     <body>
         <header>
-            <h1>Bounded Context Canvas (v4)</h1>
+            <h1>Bounded Context Canvas (v5)</h1>
         </header>
         <main class="container-fluid">
             <form>
@@ -26,9 +26,12 @@
                         </div>
                         <hr/>
                         <div class="form-group">
-                            <label for="description" class="font-weight-bolder">Description</label>
-                            <textarea class="form-control" id="description" rows="2" aria-describedby="description-help"></textarea>
-                            <small id="description-help" class="form-text text-muted">Summary of purpose and responsibilities</small>
+                            <label for="purpose" class="font-weight-bolder">Purpose</label>
+                            <textarea class="form-control" id="purpose" rows="2" aria-describedby="purpose-help"></textarea>
+                            <small id="purpose-help" class="form-text text-muted">What benefits does this context provide
+                                and how does it provide them?
+                                Describe the purpose from a business
+                                perspective.</small>
                         </div>
                         <hr/>
                         <div class="row">
@@ -308,6 +311,30 @@
                                     </div>
                                 </div>                                
                             </div>                            
+                        </div>
+                    </div>
+                </div>
+                <hr/> 
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="assumptions" class="font-weight-bolder">Assumptions</label>
+                            <textarea class="form-control" id="assumptions" rows="2" aria-describedby="assumptions-help"></textarea>
+                            <small id="assumptions-help" class="form-text text-muted">Describe which currently unverified assumptions went into this bounded context design. Make those assumptions explicit by documenting them here</small>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="metrics" class="font-weight-bolder">Verification Metrics</label>
+                            <textarea class="form-control" id="metrics" rows="2" aria-describedby="metrics-help"></textarea>
+                            <small id="metrics-help" class="form-text text-muted">Describe metrics which can be used to (in)validate the current structure of this bounded context?</small>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="questions" class="font-weight-bolder">Open Questions</label>
+                            <textarea class="form-control" id="questions" rows="2" aria-describedby="questions-help"></textarea>
+                            <small id="questions-help" class="form-text text-muted">Which questions are currently open and need to be addressed?</small>
                         </div>
                     </div>
                 </div>

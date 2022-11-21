@@ -6,9 +6,9 @@ A [bounded context](https://martinfowler.com/bliki/BoundedContext.html) is a sub
 
 The canvas guides you through the process of designing a bounded context by requiring you to consider and make choices about the key elements of its design, from naming to responsibilities, to its public interface and dependencies.
 
-![alt text](resources/bounded-context-canvas-v4.jpeg "The Bounded Context Canvas V4")
+![alt text](resources/bounded-context-canvas-v5.jpg "The Bounded Context Canvas V5")
 
-Download the [blank canvas template](resources/bounded-context-canvas-4v-blank.jpeg).
+Download the [blank canvas template](resources/bounded-context-canvas-5v-blank.jpg).
 
 ## How to Use
 
@@ -31,10 +31,12 @@ Here is a short explanation of each section of the canvas.
 ### Name
 Naming is hard. Writing down the name of your context and gaining agreement as a team will frame how you design the context.
 
-### Description
+### Purpose
 A few sentences describing the why and what of the context in business language. No technical details here.
 
-Writing down the description forces you to clearly articulate fuzzy thoughts and ensure everybody in the team is on the same page.
+Writing down the purpose forces you to clearly articulate fuzzy thoughts and ensure everybody in the team is on the same page.
+
+Describe the purpose from a business perspective, you may also name key actors for whom the bounded context provides value.
 
 ### Strategic Classification
 How important is this context to the success of your organisation?: 
@@ -102,6 +104,22 @@ What are the key domain terms that exist within this context, and what do they m
 
 ### Business Decisions
 What are the key business rules and policies within this context?
+
+### Assumptions
+You will never make design decisions having a full knowledge about everything in your domain. Most design happens based on assumptions and it is highly recommended to make them explicit. This can be done in this section of the Bounded Context Design Canvas.
+
+### Verification Metrics 
+Domain Driven Design is about an iterative approach towards modelling and design based on continuous learning. Metrcis can help you
+gathering valuable input for those learnings (think about build-measure-learn). Think about metrics that you and your team can define in order to gather learnings if the chosen boundaries of your bounded context are a good fit or not. 
+
+You can collect those metrics for instance from:
+
+- Your CI / CD environments
+- Tools like JIRA
+- From your live systems
+
+### Open Questions
+If you have questions that no one in the room can answer while running a workshop you can enter them into this section of the canvas. This way you can make sure that no open questions get lost but you can also get a visual indicator how certain the team is regarding the design of a given bounded context. Many questions are a good indicator towards a high degree of uncertainty.
 
 ## Example
 Below a filled-in version of the Bounded Context Canvas.
