@@ -351,5 +351,73 @@
                 </section>
             </article>
         </footer>
+
+        <script type="module">
+let downloadLink;
+
+document.body.addEventListener("change", ev => {
+    // synchronize form elements' properties with corresponding HTML state
+    let el = ev.target;
+    let tag = el.localName;
+    switch(tag) {
+    case "input":
+        switch(el.type) {
+        case "text":
+            el.setAttribute("value", el.value);
+            break;
+        case "radio":
+            let nodes = document.querySelectorAll(`input[type=radio][name=${el.name}`);
+            for(let node of nodes) {
+                if(node === el) {
+                    node.setAttribute("checked", "");
+                } else {
+                    node.removeAttribute("checked");
+                }
+            }
+            break;
+        default:
+            console.error(`WARNING: unsupported element \`${tag}\``);
+            break;
+        }
+        break;
+    case "textarea":
+        el.textContent = el.value;
+        break;
+    default:
+        console.error(`WARNING: unsupported element \`${tag}\``);
+        break;
+    }
+
+    // generate download link
+    if(downloadLink) {
+        downloadLink.remove();
+    }
+    let html = serializeDOM();
+    downloadLink = generateDownloadLink("bounded-context-canvas.html", html);
+    downloadLink.textContent = "download";
+    document.body.appendChild(downloadLink);
+});
+
+// adapted from TiddlyWiki <http://tiddlywiki.com>
+function generateDownloadLink(filename, html) {
+    try {
+        let blob = new Blob([html], { type: "text/html" });
+        var uri = URL.createObjectURL(blob);
+    } catch(err) { // XXX: obsolete?
+        uri = `data:text/html,${encodeURIComponent(html)}`;
+    }
+
+    let el = document.createElement("a");
+    el.setAttribute("download", filename);
+    el.setAttribute("href", uri);
+    return el;
+}
+
+function serializeDOM(doctype = document.doctype,
+        documentElement = document.documentElement) {
+    doctype = new XMLSerializer().serializeToString(doctype);
+    return [doctype, documentElement.outerHTML].join("\n");
+}
+        </script>
     </body>
 </html>
