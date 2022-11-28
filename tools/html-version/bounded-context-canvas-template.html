@@ -9,6 +9,12 @@
             @page {
                 size: auto
             }
+
+            #download-link {
+                position: fixed;
+                top: 0.5rem;
+                right: 0.5rem;
+            }
         </style>
         <title>Bounded Context Canvas</title>
     </head>
@@ -352,8 +358,9 @@
             </article>
         </footer>
 
+        <a id="download-link" class="btn btn-primary btn-lg" download="bounded-context-canvas.html" hidden>download</a>
         <script type="module">
-let downloadLink;
+let downloadLink = document.getElementById("download-link");
 
 document.body.addEventListener("change", ev => {
     // synchronize form elements' properties with corresponding HTML state
@@ -389,28 +396,19 @@ document.body.addEventListener("change", ev => {
     }
 
     // generate download link
-    if(downloadLink) {
-        downloadLink.remove();
-    }
-    let html = serializeDOM();
-    downloadLink = generateDownloadLink("bounded-context-canvas.html", html);
-    downloadLink.textContent = "download";
-    document.body.appendChild(downloadLink);
+    let uri = generateDownloadURI(serializeDOM());
+    downloadLink.setAttribute("href", uri);
+    downloadLink.hidden = false;
 });
 
 // adapted from TiddlyWiki <http://tiddlywiki.com>
-function generateDownloadLink(filename, html) {
+function generateDownloadURI(html) {
     try {
         let blob = new Blob([html], { type: "text/html" });
-        var uri = URL.createObjectURL(blob);
+        return URL.createObjectURL(blob);
     } catch(err) { // XXX: obsolete?
-        uri = `data:text/html,${encodeURIComponent(html)}`;
+        return `data:text/html,${encodeURIComponent(html)}`;
     }
-
-    let el = document.createElement("a");
-    el.setAttribute("download", filename);
-    el.setAttribute("href", uri);
-    return el;
 }
 
 function serializeDOM(doctype = document.doctype,
