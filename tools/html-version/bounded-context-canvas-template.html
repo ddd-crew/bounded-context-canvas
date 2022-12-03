@@ -398,6 +398,9 @@ document.body.addEventListener("change", ev => {
     // generate download link
     downloadLink.hidden = true;
     downloadLink.removeAttribute("href");
+    if(el.id === "name") { // use canvas name as file name
+        downloadLink.setAttribute("download", `${slugify(el.value)}.html`);
+    }
     let html = serializeDOM();
     let uri = generateDownloadURI(html);
     downloadLink.href = uri;
@@ -418,6 +421,12 @@ function serializeDOM(doctype = document.doctype,
         documentElement = document.documentElement) {
     doctype = new XMLSerializer().serializeToString(doctype);
     return [doctype, documentElement.outerHTML].join("\n");
+}
+
+function slugify(str) {
+    return str.toLowerCase().
+        replace(/[^0-9a-z-]+/g, "_").
+        replace(/^_|_$/g, "");
 }
         </script>
     </body>
