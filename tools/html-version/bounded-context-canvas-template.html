@@ -396,8 +396,11 @@ document.body.addEventListener("change", ev => {
     }
 
     // generate download link
-    let uri = generateDownloadURI(serializeDOM());
-    downloadLink.setAttribute("href", uri);
+    downloadLink.hidden = true;
+    downloadLink.removeAttribute("href");
+    let html = serializeDOM();
+    let uri = generateDownloadURI(html);
+    downloadLink.href = uri;
     downloadLink.hidden = false;
 });
 
