@@ -129,7 +129,7 @@ Below a filled-in version of the Bounded Context Canvas.
 Here are some tools that can help you to use the Bounded Context Canvas.
 
 ### HTML Version
-A [HTML version of the canvas](tools/html-version/instructions.md) you can edit in a browser and version in source control alongside your code. Contributed by [Nelson da Costa](https://github.com/baruica).
+A [HTML version of the canvas](tools/html-version/README.md) you can edit in a browser and version in source control alongside your code. Contributed by [Nelson da Costa](https://github.com/baruica).
 
 ### Miro Version
 A free [MiroHQ template](https://miro.com/miroverse/category/newly-added/the-bounded-context-canvas) of the Bounded Context Canvas.
@@ -137,7 +137,7 @@ A free [MiroHQ template](https://miro.com/miroverse/category/newly-added/the-bou
 The current version of the template on Miroverse is v4 at the moment. In the meantime, you can download a Miro board backup [here from this repository](resources/bounded-context-canvas-v5-miro.rtb)
 
 ### draw.io Version
-A [draw.io template of the canvas](tools/drawio-svg-version/instructions.md) containing the Bounded Context Canvas as template.
+A [draw.io template of the canvas](tools/drawio-svg-version/README.md) containing the Bounded Context Canvas as template.
 
 ## Design Tips
 
@@ -172,7 +172,7 @@ All resources are available [in French](translations/fr/resources)
 
 ## Contributors
 
-Thank you to all [existing and future contributors](https://github.com/ddd-crew/bounded-context-canvas/graphs/contributors) and to the following individuals who have all contributed to the Bounded Context Canvas:
+Thanks to all [existing and future contributors](https://github.com/ddd-crew/bounded-context-canvas/graphs/contributors) and to the following individuals who have all contributed to the Bounded Context Canvas:
 
 - [Kenny Baas](https://github.com/Baasie)
 - [Kim Lindhard](https://github.com/kim-lindhard-dfds)
@@ -185,7 +185,7 @@ A significant contribution to the Bounded Context Canvas was the inspiration of 
 
 The Bounded Context Canvas is freely available for you to use. In addition, your feedback and ideas are welcome to improve the canvas or to create new versions. 
 
-Feel free to also send us a pull request with your examples.
+Feel free to also send us a pull request with your examples or with new translations.
 
 [![CC BY 4.0][cc-by-shield]][cc-by]
 
