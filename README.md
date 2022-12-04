@@ -10,6 +10,18 @@ The canvas guides you through the process of designing a bounded context by requ
 
 Download the [blank canvas template](resources/bounded-context-canvas-5v-blank.jpg).
 
+## Summary
+
+- [How to Use](#how-to-use)
+- [Section Definition](#section-definitions)
+- [Example](#example)
+- [Tools](#tools)
+- [Design Tips](#design-tips)
+- [Additional Resources](#additional-resources)
+- [Translations](#translations)
+- [Contributors](#contributors)
+- [Contributions and Feedback](#contributions-and-feedback)
+
 ## How to Use
 
 >To quickly get started with the Bounded Context Canvas, complete the canvas in the order the sections are presented in [Section Definitions](#section-definitions)
@@ -109,7 +121,7 @@ What are the key business rules and policies within this context?
 You will never make design decisions having a full knowledge about everything in your domain. Most design happens based on assumptions and it is highly recommended to make them explicit. This can be done in this section of the Bounded Context Design Canvas.
 
 ### Verification Metrics 
-Domain Driven Design is about an iterative approach towards modelling and design based on continuous learning. Metrcis can help you
+Domain Driven Design is about an iterative approach towards modelling and design based on continuous learning. Metrics can help you
 gathering valuable input for those learnings (think about build-measure-learn). Think about metrics that you and your team can define in order to gather learnings if the chosen boundaries of your bounded context are a good fit or not. 
 
 You can collect those metrics for instance from:
@@ -168,7 +180,7 @@ The public interface of a bounded context is its contract with the rest of the s
 
 ## Translations
 
-All resources are available [in French](translations/fr/resources)
+All resources are available [in French](translations/fr/resources) and in [Portuguese](/translations/pt/resources).
 
 ## Contributors
 
