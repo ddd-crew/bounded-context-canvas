@@ -1,6 +1,6 @@
 # Ficha de Características do Modelo
 
-É provável que um modelo seja descrito por várias características diferentes. Revise a lista abaixo e escolha qual se aplica ao Contexto em que você está trabalhando ou pense em suas próprias características.
+É provável que um modelo seja descrito por várias características diferentes. Revise a lista abaixo e escolha qual se aplica ao contexto em que você está trabalhando ou pense em suas próprias características.
 
 | Característica | Heurística |
 |---|---|
