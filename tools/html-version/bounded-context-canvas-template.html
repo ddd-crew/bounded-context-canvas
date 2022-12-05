@@ -9,6 +9,12 @@
             @page {
                 size: auto
             }
+
+            #download-link {
+                position: fixed;
+                top: 0.5rem;
+                right: 0.5rem;
+            }
         </style>
         <title>Bounded Context Canvas</title>
     </head>
@@ -342,14 +348,86 @@
             </form>
         </main>
         <footer>
-            <small id="dependenciesHelp" class="form-text text-muted">Relationship : mutually dependant, upstream/downstream, indepedant</small>
+            <small id="dependenciesHelp" class="form-text text-muted">Relationships: mutually dependent, upstream/downstream, independent</small>
             <small id="relationships-help" class="form-text text-muted">ACL: Anti-Corruption Layer - OHS: Open Host Service - PL: Published Language</small>
             <article>
                 <section>
-                    <p>Source and Documentation<a href="https://github.com/ddd-crew/bounded-context-canvas" target="-blank" rel="noopener noreferrer">DDD Crew on GitHub: Bounded Context Canvas</a></p>
+                    <p>Source and Documentation: <a href="https://github.com/ddd-crew/bounded-context-canvas" target="_blank" rel="noopener noreferrer">DDD Crew on GitHub: Bounded Context Canvas</a></p>
                     
                 </section>
             </article>
         </footer>
+
+        <a id="download-link" class="btn btn-primary btn-lg" download="bounded-context-canvas.html" hidden>download</a>
+        <script type="module">
+let downloadLink = document.getElementById("download-link");
+
+document.body.addEventListener("change", ev => {
+    // synchronize form elements' properties with corresponding HTML state
+    let el = ev.target;
+    let tag = el.localName;
+    switch(tag) {
+    case "input":
+        switch(el.type) {
+        case "text":
+            el.setAttribute("value", el.value);
+            break;
+        case "radio":
+            let nodes = document.querySelectorAll(`input[type=radio][name=${el.name}`);
+            for(let node of nodes) {
+                if(node === el) {
+                    node.setAttribute("checked", "");
+                } else {
+                    node.removeAttribute("checked");
+                }
+            }
+            break;
+        default:
+            console.error(`WARNING: unsupported element \`${tag}\``);
+            break;
+        }
+        break;
+    case "textarea":
+        el.textContent = el.value;
+        break;
+    default:
+        console.error(`WARNING: unsupported element \`${tag}\``);
+        break;
+    }
+
+    // generate download link
+    downloadLink.hidden = true;
+    downloadLink.removeAttribute("href");
+    if(el.id === "name") { // use canvas name as file name
+        downloadLink.setAttribute("download", `${slugify(el.value)}.html`);
+    }
+    let html = serializeDOM();
+    let uri = generateDownloadURI(html);
+    downloadLink.href = uri;
+    downloadLink.hidden = false;
+});
+
+// adapted from TiddlyWiki <http://tiddlywiki.com>
+function generateDownloadURI(html) {
+    try {
+        let blob = new Blob([html], { type: "text/html" });
+        return URL.createObjectURL(blob);
+    } catch(err) { // XXX: obsolete?
+        return `data:text/html,${encodeURIComponent(html)}`;
+    }
+}
+
+function serializeDOM(doctype = document.doctype,
+        documentElement = document.documentElement) {
+    doctype = new XMLSerializer().serializeToString(doctype);
+    return [doctype, documentElement.outerHTML].join("\n");
+}
+
+function slugify(str) {
+    return str.toLowerCase().
+        replace(/[^0-9a-z-]+/g, "_").
+        replace(/^_|_$/g, "");
+}
+        </script>
     </body>
 </html>
