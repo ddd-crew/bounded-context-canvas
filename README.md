@@ -2,7 +2,7 @@
 
 The Bounded Context Canvas is a collaborative tool for designing and documenting the design of a single bounded context.
 
-A [bounded context](https://martinfowler.com/bliki/BoundedContext.html) is a sub-system in a software architecture aligned to a part of your domain. A bounded context can be seen as a unit of language consistency, a boundary for a model expressed in a consistent language tailored for a specific purpose. As a starting heuristic, it is an understandability boundary: things you need to understand together want to be together.
+If you're not sure what a bounded context is you may want to check out Eric Evans [DDD Reference](https://www.domainlanguage.com/ddd/reference/) and [Martin Fowler's article] (https://martinfowler.com/bliki/BoundedContext.html).
 
 The canvas guides you through the process of designing a bounded context by requiring you to consider and make choices about the key elements of its design, from naming to responsibilities, to its public interface and dependencies.
 
