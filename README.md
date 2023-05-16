@@ -148,6 +148,9 @@ A free [MiroHQ template](https://miro.com/miroverse/category/newly-added/the-bou
 
 The current version of the template on Miroverse is v4 at the moment. In the meantime, you can download a Miro board backup [here from this repository](resources/bounded-context-canvas-v5-miro.rtb)
 
+### Excalidraw version
+You can import [this template](resources/bounded-context-canvas-v5.excalidraw) into any collaborative [excalidraw](https://github.com/excalidraw/excalidraw) editor, for instance [excalidraw.com](https://excalidraw.com)
+
 ### draw.io Version
 A [draw.io template of the canvas](tools/drawio-svg-version/README.md) containing the Bounded Context Canvas as template.
 
