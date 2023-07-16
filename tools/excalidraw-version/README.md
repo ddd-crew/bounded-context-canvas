@@ -4,7 +4,7 @@
 
 The *bounded context canvas* is described in [this blog post](https://medium.com/nick-tune-tech-strategy-blog/bounded-context-canvas-v2-simplifications-and-additions-229ed35f825f) by Nick Tune (highly recommended blog btw).
 
-## Basic draw.io Usage
+## Basic Excalidraw Usage
 
 - Checkout this repository
 - Head over to [excalidraw.com](https://excalidraw.com/)
