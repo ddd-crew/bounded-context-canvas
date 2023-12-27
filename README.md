@@ -150,7 +150,7 @@ The current version of the template on Miroverse is v4 at the moment. In the mea
 
 ### draw.io Version
 A [draw.io template of the canvas](tools/drawio-svg-version/README.md) containing the Bounded Context Canvas as template.
-=======
+
 ### Excalidraw Version
 A [Excalidraw template of the canvas](tools/excalidraw-version/README.md) containing the Bounded Context Canvas as template.
 
