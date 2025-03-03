@@ -154,6 +154,9 @@ A [draw.io template of the canvas](tools/drawio-svg-version/README.md) containin
 ### Excalidraw Version
 A [Excalidraw template of the canvas](tools/excalidraw-version/README.md) containing the Bounded Context Canvas as template.
 
+### Lucidchart Version
+A [Lucidchart template of the canvas](tools/lucid-version/README.md) containing the Bounded Context Canvas as template.
+
 ## Design Tips
 
 By making the important elements of a bounded context's design visible on the canvas, you can more easily challenge and improve the design. Here are some tips help you challenge and improve a design.
