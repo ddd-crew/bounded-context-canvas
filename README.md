@@ -99,7 +99,7 @@ If the Bounded Context owns the user interface (e.g. [micro-frontend](https://ma
 
 #### Relationship Type
 
-The relationship type between two bounded contexts indicates how the models and teams influence each other. See [Context Mappping](https://github.com/ddd-crew/context-mapping) to learn about relationship types.
+The relationship type between two bounded contexts indicates how the models and teams influence each other. See [Context Mapping](https://github.com/ddd-crew/context-mapping) to learn about relationship types.
 
 #### Organising Into Swimlanes
 
