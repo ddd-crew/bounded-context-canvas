@@ -189,7 +189,9 @@ The public interface of a bounded context is its contract with the rest of the s
 
 ## Translations
 
-All resources are available [in French](translations/fr/resources) and in [Portuguese](/translations/pt/resources).
+- [French resources](translations/fr/resources)
+- [Portuguese visual resources](translations/pt/resources)
+- [Brazilian Portuguese (pt-BR) documentation](translations/pt-br/README.md)
 
 ## Contributors
 
