@@ -77,7 +77,7 @@ Qual é o estágio de evolução do conceito? Consulte [Wardley Maps](https://me
 
 > Para descrições detalhadas de gênese, construído sob medida, produto e commodity, consulte as [definições de evolução dos Wardley Maps](https://twitter.com/swardley/status/989211014485901316/photo/1).
 
-Para obter ajuda ao preencher essa seção, consulte o [Core Domain Charts](https://github.com/ddd-crew/core-domain-charts).
+Para obter ajuda ao preencher essa seção, consulte o [Core Domain Charts em português brasileiro](https://github.com/ddd-crew/core-domain-charts/blob/main/translations/pt-br/README.md).
 
 ### Papéis do domínio (*Domain Roles*)
 
@@ -109,7 +109,7 @@ Quando o contexto delimitado é responsável pela interface do usuário — por 
 
 #### Tipo de relacionamento (*Relationship Type*)
 
-O tipo de relacionamento entre dois contextos delimitados indica como seus modelos e times influenciam uns aos outros. Consulte [Context Mapping](https://github.com/ddd-crew/context-mapping) para conhecer esses tipos de relacionamento.
+O tipo de relacionamento entre dois contextos delimitados indica como seus modelos e times influenciam uns aos outros. Consulte [Context Mapping em português brasileiro](https://github.com/ddd-crew/context-mapping/blob/main/translations/pt-br/README.md) para conhecer esses tipos de relacionamento.
 
 #### Organização em raias (*Organising Into Swimlanes*)
 
