@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/ddd-crew/bounded-context-canvas/main/tools/yaml-version/bounded-context-canvas.schema.json
+#
+# Bounded Context Canvas (v5) - copy this file, fill it in, and render it with:
+#   gomplate -d canvas=bounded-context-canvas.yaml -f bounded-context-canvas.svg.tmpl -o bounded-context-canvas.svg
+#
+# Only "name" is required. Sections you leave empty are rendered with the
+# canvas' guidance text, so a file containing only a name renders a blank
+# canvas. To fill in a section, uncomment its example entries and edit them.
+
+name: My Bounded Context
+
+# What benefits does this context provide, and how does it provide them?
+# Describe the purpose from a business perspective.
+purpose:
+
+strategic_classification:
+  domain:          # core | supporting | generic | other
+  business_model:  # revenue | engagement | compliance | cost reduction (one value or a list)
+  evolution:       # genesis | custom built | product | commodity
+
+domain_roles:
+#  - execution context   # e.g. draft, execution, analysis or gateway context
+
+# Collaborators that initiate communication with this context.
+inbound_communication:
+#  - collaborator: Checkout
+#    type: bounded context          # bounded context | frontend | user interaction | external system | other
+#    relationship: customer/supplier
+#    messages:
+#      - { type: command, name: Authorize Payment }   # command | query | event
+
+# Collaborators this context initiates communication with.
+outbound_communication:
+#  - collaborator: Order Fulfilment
+#    type: bounded context
+#    messages:
+#      - { type: event, name: Order Paid }
+
+# Context-specific domain terminology.
+ubiquitous_language:
+#  - term: Payment Intent
+#    definition: The intention to collect a specific amount for one order.
+
+# Key business rules, policies, and decisions.
+business_decisions:
+#  - Payments are captured only when the order ships.
+
+assumptions:
+#  - A single payment service provider is sufficient for all markets.
+
+verification_metrics:
+#  - Number of changes that also require changes in other contexts.
+
+open_questions:
+#  - Who owns invoices?
