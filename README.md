@@ -13,7 +13,7 @@ Download the [blank canvas template](resources/bounded-context-canvas-5v-blank.j
 ## Summary
 
 - [How to Use](#how-to-use)
-- [Section Definition](#section-definitions)
+- [Section Definitions](#section-definitions)
 - [Example](#example)
 - [Tools](#tools)
 - [Design Tips](#design-tips)
@@ -122,7 +122,7 @@ You will never make design decisions having a full knowledge about everything in
 
 ### Verification Metrics 
 Domain Driven Design is about an iterative approach towards modelling and design based on continuous learning. Metrics can help you
-gathering valuable input for those learnings (think about build-measure-learn). Think about metrics that you and your team can define in order to gather learnings if the chosen boundaries of your bounded context are a good fit or not. 
+gather valuable input for those learnings (think about build-measure-learn). Think about metrics that you and your team can define in order to gather learnings if the chosen boundaries of your bounded context are a good fit or not. 
 
 You can collect those metrics for instance from:
 
@@ -144,7 +144,7 @@ Here are some tools that can help you to use the Bounded Context Canvas.
 A free and open source [online Bounded Context Canvas tool](https://dddtoolbox.com/bounded-context-canvas) with an interactive editor ([Source Code](https://github.com/poulainpi/ddd-toolbox)).
 
 ### HTML Version
-A [HTML version of the canvas](tools/html-version/README.md) you can edit in a browser and version in source control alongside your code. Contributed by [Nelson da Costa](https://github.com/baruica).
+An [HTML version of the canvas](tools/html-version/README.md) you can edit in a browser and version in source control alongside your code. Contributed by [Nelson da Costa](https://github.com/baruica).
 
 ### Miro Version
 A free [MiroHQ template](https://miro.com/miroverse/category/newly-added/the-bounded-context-canvas) of the Bounded Context Canvas.
@@ -155,14 +155,14 @@ The current version of the template on Miroverse is v4 at the moment. In the mea
 A [draw.io template of the canvas](tools/drawio-svg-version/README.md) containing the Bounded Context Canvas as template.
 
 ### Excalidraw Version
-A [Excalidraw template of the canvas](tools/excalidraw-version/README.md) containing the Bounded Context Canvas as template.
+An [Excalidraw template of the canvas](tools/excalidraw-version/README.md) containing the Bounded Context Canvas as template.
 
 ### Lucidchart Version
 A [Lucidchart template of the canvas](tools/lucid-version/README.md) containing the Bounded Context Canvas as template.
 
 ## Design Tips
 
-By making the important elements of a bounded context's design visible on the canvas, you can more easily challenge and improve the design. Here are some tips help you challenge and improve a design.
+By making the important elements of a bounded context's design visible on the canvas, you can more easily challenge and improve the design. Here are some tips to help you challenge and improve a design.
 
 > Please feel free to create a Pull Request sharing your tips.
 
@@ -190,6 +190,7 @@ The public interface of a bounded context is its contract with the rest of the s
 ## Translations
 
 - [French resources](translations/fr/resources)
+- [German resources](translations/de/resources)
 - [Portuguese visual resources](translations/pt/resources)
 - [Brazilian Portuguese (pt-BR) documentation](translations/pt-br/README.md)
 

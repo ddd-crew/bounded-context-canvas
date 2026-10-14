@@ -2,7 +2,7 @@
 
 ![Bounded Context Canvas Excalidraw version](bounded-context-canvas-excalidraw.svg)
 
-The *bounded context canvas* is described in [this blog post](https://medium.com/nick-tune-tech-strategy-blog/bounded-context-canvas-v2-simplifications-and-additions-229ed35f825f) by Nick Tune (highly recommended blog btw).
+The *bounded context canvas* and each of its sections are described in the [main README](../../README.md).
 
 ## Basic Excalidraw Usage
 
@@ -19,7 +19,7 @@ Besides the website, there are several options available to use Excalidraw:
 - [VS Code extension](https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor)
 - [Logseq integration](https://www.loom.com/share/cdc10a6d54644d7c9bb88cdcb3a0168b?t=0)
 
-Either way allows you to save the current template and data filled in) as an `.excalidraw` or `.svg` file (which can live next to the bounded context's code).
+Either way allows you to save the current template (and data filled in) as an `.excalidraw` or `.svg` file (which can live next to the bounded context's code).
 
 Doing so allows one to re-open the saved file and update the filled in data.
 
