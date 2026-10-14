@@ -1,6 +1,6 @@
 # Bounded Context Canvas how to
 
-The *bounded context canvas* is described in [this blog post](https://medium.com/nick-tune-tech-strategy-blog/bounded-context-canvas-v2-simplifications-and-additions-229ed35f825f) by Nick Tune (highly recommended blog btw).
+The *bounded context canvas* and each of its sections are described in the [main README](../../README.md).
 
 ## Prerequisites
 
