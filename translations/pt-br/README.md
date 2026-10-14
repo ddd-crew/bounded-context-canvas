@@ -167,6 +167,10 @@ Uma [ferramenta on-line gratuita e de código aberto para o Bounded Context Canv
 
 Uma [versão HTML do canvas](../../tools/html-version/README.md), que pode ser editada no navegador e versionada no controle de código-fonte junto com o sistema. Contribuição de [Nelson da Costa](https://github.com/baruica).
 
+### Versão YAML
+
+Uma [versão YAML do canvas](../../tools/yaml-version/README.md), que pode ser mantida no controle de código-fonte e renderizada como SVG com o [gomplate](https://docs.gomplate.ca).
+
 ### Versão para Miro
 
 Um [modelo gratuito do Bounded Context Canvas no Miroverse](https://miro.com/miroverse/category/newly-added/the-bounded-context-canvas).

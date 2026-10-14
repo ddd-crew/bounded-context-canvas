@@ -1,0 +1,486 @@
+{{- /*
+  Bounded Context Canvas (v5) SVG template for gomplate (https://gomplate.ca).
+
+  Usage:
+    gomplate -d canvas=my-context.yaml -f bounded-context-canvas.svg.tmpl -o my-context.svg
+
+  SVG has no automatic text wrapping, so the "wrap" helper breaks text into
+  lines using approximate glyph widths (Helvetica/Arial metrics, with some
+  headroom). Sections grow to fit their content.
+
+  Helpers that compute something return JSON (via tmpl.Exec), because Go
+  templates can only return strings.
+*/ -}}
+
+{{- /* ===================== text helpers ===================== */ -}}
+
+{{- /* Render a YAML scalar as text: null becomes "", dates become YYYY-MM-DD. */ -}}
+{{- define "str" -}}
+{{- if test.IsKind "invalid" . }}{{ else if eq (printf "%T" .) "time.Time" }}{{ .Format "2006-01-02" }}{{ else }}{{ conv.ToString . }}{{ end -}}
+{{- end -}}
+
+{{- /* Optional text field .k of map .m, trimmed; "" when missing or null. */ -}}
+{{- define "get" -}}
+{{- if has .m .k }}{{ tmpl.Exec "str" (index .m .k) | strings.TrimSpace }}{{ end -}}
+{{- end -}}
+
+{{- /* Width in px of .text at font size .s. Widths are Helvetica/Arial em fractions. */ -}}
+{{- define "textWidth" -}}
+{{- $w := 0.0 -}}
+{{- range $ch := strings.Split "" .text -}}
+  {{- $cw := 0.6 -}}
+  {{- if strings.Contains $ch `ijl'` }}{{ $cw = 0.22 -}}
+  {{- else if strings.Contains $ch ` ftI.,:;!/[]|\` }}{{ $cw = 0.28 -}}
+  {{- else if strings.Contains $ch `r()-*"{}` }}{{ $cw = 0.36 -}}
+  {{- else if strings.Contains $ch `cksvxyzJ^` }}{{ $cw = 0.5 -}}
+  {{- else if strings.Contains $ch `abdeghnopqu0123456789?_#$L` }}{{ $cw = 0.56 -}}
+  {{- else if strings.Contains $ch `<>=+~FTZ` }}{{ $cw = 0.61 -}}
+  {{- else if strings.Contains $ch `ABEKPSVXY&` }}{{ $cw = 0.67 -}}
+  {{- else if strings.Contains $ch `wCDHNRU` }}{{ $cw = 0.72 -}}
+  {{- else if strings.Contains $ch `GOQ` }}{{ $cw = 0.78 -}}
+  {{- else if strings.Contains $ch `mM` }}{{ $cw = 0.83 -}}
+  {{- else if strings.Contains $ch `%W@` }}{{ $cw = 0.95 -}}
+  {{- else if regexp.Match `[\p{Han}\p{Hiragana}\p{Katakana}\p{Hangul}\x{3000}-\x{303F}\x{FF00}-\x{FFEF}]` $ch }}{{ $cw = 1.0 -}}
+  {{- end -}}
+  {{- $w = math.Add $w $cw -}}
+{{- end -}}
+{{- math.Mul $w .s -}}
+{{- end -}}
+
+{{- /*
+  Wrap .text into lines no wider than .w px at font size .s (.bold optional).
+  Paragraphs (newlines) are wrapped separately; blank lines are kept. Words
+  wider than a line, and text without spaces, are broken between characters.
+  Returns a JSON array of lines.
+*/ -}}
+{{- define "wrap" -}}
+{{- $s := math.Mul .s 1.05 }}{{ if and (has . "bold") .bold }}{{ $s = math.Mul .s 1.13 }}{{ end -}}
+{{- $max := conv.ToFloat64 .w -}}
+{{- $space := math.Mul 0.28 $s -}}
+{{- $out := coll.Slice -}}
+{{- $text := tmpl.Exec "str" .text | strings.TrimSpace -}}
+{{- if $text -}}
+{{- range $para := strings.Split "\n" $text -}}
+  {{- $line := "" }}{{ $lineW := 0.0 -}}
+  {{- range $word := strings.Split " " (strings.TrimSpace $para) }}{{ if $word -}}
+    {{- $ww := tmpl.Exec "textWidth" (dict "text" $word "s" $s) | conv.ToFloat64 -}}
+    {{- if and $line (le (math.Add $lineW $space $ww) $max) -}}
+      {{- $line = print $line " " $word }}{{ $lineW = math.Add $lineW $space $ww -}}
+    {{- else -}}
+      {{- if $line }}{{ $out = $out | coll.Append $line }}{{ end -}}
+      {{- if le $ww $max -}}
+        {{- $line = $word }}{{ $lineW = $ww -}}
+      {{- else -}}
+        {{- $line = "" }}{{ $lineW = 0.0 -}}
+        {{- range $ch := strings.Split "" $word -}}
+          {{- $cw := tmpl.Exec "textWidth" (dict "text" $ch "s" $s) | conv.ToFloat64 -}}
+          {{- if and $line (gt (math.Add $lineW $cw) $max) }}{{ $out = $out | coll.Append $line }}{{ $line = "" }}{{ $lineW = 0.0 }}{{ end -}}
+          {{- $line = print $line $ch }}{{ $lineW = math.Add $lineW $cw -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end }}{{ end -}}
+  {{- $out = $out | coll.Append (or $line " ") -}}
+{{- end -}}
+{{- end -}}
+{{- $out | data.ToJSON -}}
+{{- end -}}
+
+{{- /* ===================== input helpers ===================== */ -}}
+
+{{- /* Fail on keys of map .m that are not in .allowed. */ -}}
+{{- define "checkKeys" -}}
+{{- range $k, $_ := .m -}}
+  {{- test.Assert (printf "canvas: %s: unknown key %q, expected one of %v" $.where $k $.allowed) (has $.allowed $k) -}}
+{{- end -}}
+{{- end -}}
+
+{{- /* Normalise .v (null, a single value, or a list) to a JSON array of non-empty strings. */ -}}
+{{- define "textList" -}}
+{{- $v := .v -}}
+{{- if test.IsKind "invalid" $v }}{{ $v = coll.Slice }}{{ else if not (test.IsKind "slice" $v) }}{{ $v = coll.Slice $v }}{{ end -}}
+{{- $out := coll.Slice -}}
+{{- range $v }}{{ $s := tmpl.Exec "str" . | strings.TrimSpace }}{{ if $s }}{{ $out = $out | coll.Append $s }}{{ end }}{{ end -}}
+{{- $out | data.ToJSON -}}
+{{- end -}}
+
+{{- /* ===================== layout helpers ===================== */ -}}
+
+{{- /* Lay out a bullet list of .items wrapped to .w at font size .s. */ -}}
+{{- define "listLayout" -}}
+{{- $items := coll.Slice }}{{ $y := 0 -}}
+{{- range .items -}}
+  {{- $lines := tmpl.Exec "wrap" (dict "text" . "w" (math.Sub $.w 22) "s" $.s) | data.JSONArray -}}
+  {{- $items = $items | coll.Append (dict "dy" $y "lines" $lines) -}}
+  {{- $y = math.Add $y (math.Mul $.lh (len $lines)) $.gap -}}
+{{- end -}}
+{{- dict "items" $items "h" (math.Max 0 (math.Sub $y $.gap)) | data.ToJSON -}}
+{{- end -}}
+
+{{- /* Lay out one collaborator lane: a card, plus message stickies in rows of three. */ -}}
+{{- define "laneLayout" -}}
+{{- $name := tmpl.Exec "wrap" (dict "text" .collaborator "w" 206 "s" 18 "bold" true) | data.JSONArray -}}
+{{- $details := coll.Slice -}}
+{{- range $d := coll.Slice .type .relationship }}{{ if $d -}}
+  {{- range tmpl.Exec "wrap" (dict "text" $d "w" 206 "s" 14) | data.JSONArray }}{{ $details = $details | coll.Append . }}{{ end -}}
+{{- end }}{{ end -}}
+{{- $cardH := math.Add 34 (math.Mul 22 (len $name)) (math.Mul 18 (len $details)) -}}
+{{- $stickies := coll.Slice }}{{ $rowY := 0 }}{{ $rowMax := 0 -}}
+{{- range $i, $m := .messages -}}
+  {{- if and $i (eq (math.Rem $i 3) 0) }}{{ $rowY = math.Add $rowY $rowMax 10 }}{{ $rowMax = 0 }}{{ end -}}
+  {{- $lines := tmpl.Exec "wrap" (dict "text" $m.name "w" 119 "s" 14 "bold" true) | data.JSONArray -}}
+  {{- $h := math.Max 70 (math.Add 24 (math.Mul 17 (len $lines))) -}}
+  {{- $rowMax = math.Max $rowMax $h -}}
+  {{- $stickies = $stickies | coll.Append (dict "dx" (math.Mul 145 (math.Rem $i 3)) "dy" $rowY "h" $h "type" $m.type "lines" $lines) -}}
+{{- end -}}
+{{- dict "name" $name "details" $details "cardH" $cardH "stickies" $stickies "h" (math.Max $cardH (math.Add $rowY $rowMax)) | data.ToJSON -}}
+{{- end -}}
+
+{{- /* ===================== drawing helpers ===================== */ -}}
+
+{{- define "text" -}}
+<text x="{{ .x }}" y="{{ .y }}" class="{{ .class }}">
+{{- range $i, $l := .lines }}<tspan x="{{ $.x }}" dy="{{ if $i }}{{ $.lh }}{{ else }}0{{ end }}">{{ $l | html }}</tspan>{{ end -}}
+</text>
+{{- end -}}
+
+{{- define "sticky" }}
+  <g class="sticky {{ .type }}">
+    <rect x="{{ .x }}" y="{{ .y }}" width="135" height="{{ .h }}"/>
+    {{ template "text" dict "x" (math.Add .x 67.5) "y" (math.Add .y (math.Div .h 2) (math.Mul -8.5 (math.Sub (len .lines) 1)) 5) "lh" 17 "lines" .lines "class" "" }}
+  </g>
+{{- end -}}
+
+{{- define "list" -}}
+{{- range .layout.items }}
+  <text x="{{ $.x }}" y="{{ math.Add $.y .dy }}" class="{{ $.class }}">•</text>
+  {{ template "text" dict "x" (math.Add $.x 20) "y" (math.Add $.y .dy) "lh" $.lh "lines" .lines "class" $.class }}
+{{- end -}}
+{{- end -}}
+
+{{- define "hint" }}
+  {{ template "text" dict "x" .x "y" .y "lh" 40 "lines" .lines "class" "hint" }}
+{{- end -}}
+
+{{- /* An inbound or outbound communication section. */ -}}
+{{- define "communication" }}
+  <text x="{{ .x }}" y="{{ math.Add .top 50 }}" class="title">{{ .title }}</text>
+  <text x="{{ .labels.collaborator }}" y="{{ math.Add .top 102 }}" class="column">Collaborator</text>
+  <text x="{{ .labels.messages }}" y="{{ math.Add .top 102 }}" class="column">Messages</text>
+  <path class="arrow" d="M {{ .x }} {{ math.Add .top 118 }} H {{ math.Sub .arrowEnd 45 }} V {{ math.Add .top 110 }} L {{ .arrowEnd }} {{ math.Add .top 127 }} L {{ math.Sub .arrowEnd 45 }} {{ math.Add .top 144 }} V {{ math.Add .top 136 }} H {{ .x }} Z"/>
+{{- range $l := .lanes }}
+  <rect class="card" x="{{ $.cardX }}" y="{{ $l.y }}" width="230" height="{{ $l.cardH }}" rx="4"/>
+  {{ template "text" dict "x" (math.Add $.cardX 12) "y" (math.Add $l.y 28) "lh" 22 "lines" $l.name "class" "card-name" }}
+{{- if $l.details }}
+  {{ template "text" dict "x" (math.Add $.cardX 12) "y" (math.Add $l.y 28 (math.Mul 22 (len $l.name))) "lh" 18 "lines" $l.details "class" "card-detail" }}
+{{- end }}
+{{- range $l.stickies }}{{ template "sticky" dict "x" (math.Add $.msgX .dx) "y" (math.Add $l.y .dy) "h" .h "type" .type "lines" .lines }}{{ end }}
+{{- end }}
+{{- if not .lanes }}
+{{- range $i, $t := coll.Slice "query" "command" "event" }}
+{{- template "sticky" dict "x" (math.Add $.placeholderX (math.Mul 145 $i)) "y" (math.Add $.top 250) "h" 75 "type" $t "lines" (coll.Slice (printf "<%s>" (strings.Title $t))) }}
+{{- end }}
+{{- end }}
+{{- end -}}
+
+{{- /* ===================== input ===================== */ -}}
+
+{{- $raw := ds "canvas" -}}
+{{- test.Assert "canvas: the file must contain a YAML mapping" (test.IsKind "map" $raw) -}}
+{{- template "checkKeys" dict "where" "top level" "m" $raw "allowed" (coll.Slice
+  "name" "purpose" "strategic_classification" "domain_roles"
+  "inbound_communication" "outbound_communication" "ubiquitous_language"
+  "business_decisions" "assumptions" "verification_metrics" "open_questions") -}}
+
+{{- $name := tmpl.Exec "get" (dict "m" $raw "k" "name") -}}
+{{- test.Assert "canvas: 'name' is required" (ne $name "") -}}
+{{- $purpose := tmpl.Exec "get" (dict "m" $raw "k" "purpose") -}}
+
+{{- /* Strategic classification: each dimension takes one value or a list. */ -}}
+{{- $strategic := coll.Slice
+  (dict "key" "domain" "label" "Domain" "options" (coll.Slice "core" "supporting" "generic" "other"))
+  (dict "key" "business_model" "label" "Business Model" "options" (coll.Slice "revenue" "engagement" "compliance" "cost reduction"))
+  (dict "key" "evolution" "label" "Evolution" "options" (coll.Slice "genesis" "custom built" "product" "commodity")) -}}
+{{- $sc := dict }}{{ if has $raw "strategic_classification" }}{{ $sc = index $raw "strategic_classification" }}{{ end -}}
+{{- if test.IsKind "invalid" $sc }}{{ $sc = dict }}{{ end -}}
+{{- test.Assert "canvas: strategic_classification must be a mapping" (test.IsKind "map" $sc) -}}
+{{- template "checkKeys" dict "where" "strategic_classification" "m" $sc "allowed" (coll.Slice "domain" "business_model" "evolution") -}}
+{{- $chosen := dict -}}
+{{- range $s := $strategic -}}
+  {{- $v := coll.Slice }}{{ if has $sc $s.key }}{{ $v = index $sc $s.key }}{{ end -}}
+  {{- $v = tmpl.Exec "textList" (dict "v" $v) | data.JSONArray -}}
+  {{- range $v }}{{ test.Assert (printf "canvas: strategic_classification.%s: unknown value %q, expected one of %v" $s.key . $s.options) (has $s.options .) }}{{ end -}}
+  {{- $chosen = coll.Merge (dict $s.key $v) $chosen -}}
+{{- end -}}
+
+{{- /* Text lists. */ -}}
+{{- $lists := dict -}}
+{{- range $k := coll.Slice "domain_roles" "business_decisions" "assumptions" "verification_metrics" "open_questions" -}}
+  {{- $v := coll.Slice }}{{ if has $raw $k }}{{ $v = index $raw $k }}{{ end -}}
+  {{- $lists = coll.Merge (dict $k (tmpl.Exec "textList" (dict "v" $v) | data.JSONArray)) $lists -}}
+{{- end -}}
+
+{{- /* Ubiquitous language: entries are {term, definition}, or just a term. */ -}}
+{{- $language := coll.Slice -}}
+{{- $v := coll.Slice }}{{ if has $raw "ubiquitous_language" }}{{ $v = index $raw "ubiquitous_language" }}{{ end -}}
+{{- if test.IsKind "invalid" $v }}{{ $v = coll.Slice }}{{ end -}}
+{{- test.Assert "canvas: ubiquitous_language must be a list" (test.IsKind "slice" $v) -}}
+{{- range $i, $e := $v -}}
+  {{- if test.IsKind "map" $e -}}
+    {{- template "checkKeys" dict "where" (printf "ubiquitous_language[%d]" $i) "m" $e "allowed" (coll.Slice "term" "definition") -}}
+    {{- $term := tmpl.Exec "get" (dict "m" $e "k" "term") -}}
+    {{- test.Assert (printf "canvas: ubiquitous_language[%d]: 'term' is required" $i) (ne $term "") -}}
+    {{- $language = $language | coll.Append (dict "term" $term "definition" (tmpl.Exec "get" (dict "m" $e "k" "definition"))) -}}
+  {{- else -}}
+    {{- $term := tmpl.Exec "str" $e | strings.TrimSpace -}}
+    {{- if $term }}{{ $language = $language | coll.Append (dict "term" $term "definition" "") }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Communication: validate, normalise and lay out the collaborator lanes. */ -}}
+{{- $collaboratorTypes := coll.Slice "bounded context" "frontend" "user interaction" "external system" "other" -}}
+{{- $messageTypes := coll.Slice "command" "query" "event" -}}
+{{- $collaborations := dict -}}
+{{- range $key := coll.Slice "inbound_communication" "outbound_communication" -}}
+  {{- $v := coll.Slice }}{{ if has $raw $key }}{{ $v = index $raw $key }}{{ end -}}
+  {{- if test.IsKind "invalid" $v }}{{ $v = coll.Slice }}{{ end -}}
+  {{- test.Assert (printf "canvas: %s must be a list" $key) (test.IsKind "slice" $v) -}}
+  {{- $out := coll.Slice -}}
+  {{- range $i, $c := $v -}}
+    {{- $where := printf "%s[%d]" $key $i -}}
+    {{- test.Assert (printf "canvas: %s must be a mapping with a 'collaborator'" $where) (test.IsKind "map" $c) -}}
+    {{- template "checkKeys" dict "where" $where "m" $c "allowed" (coll.Slice "collaborator" "type" "relationship" "messages") -}}
+    {{- $collaborator := tmpl.Exec "get" (dict "m" $c "k" "collaborator") -}}
+    {{- test.Assert (printf "canvas: %s: 'collaborator' is required" $where) (ne $collaborator "") -}}
+    {{- $type := tmpl.Exec "get" (dict "m" $c "k" "type") -}}
+    {{- test.Assert (printf "canvas: %s (%s): unknown type %q, expected one of %v" $where $collaborator $type $collaboratorTypes) (or (eq $type "") (has $collaboratorTypes $type)) -}}
+    {{- $mv := coll.Slice }}{{ if has $c "messages" }}{{ $mv = index $c "messages" }}{{ end -}}
+    {{- if test.IsKind "invalid" $mv }}{{ $mv = coll.Slice }}{{ end -}}
+    {{- test.Assert (printf "canvas: %s (%s): messages must be a list" $where $collaborator) (test.IsKind "slice" $mv) -}}
+    {{- $messages := coll.Slice -}}
+    {{- range $j, $m := $mv -}}
+      {{- $mwhere := printf "%s.messages[%d]" $where $j -}}
+      {{- test.Assert (printf "canvas: %s must be a mapping with 'type' and 'name'" $mwhere) (test.IsKind "map" $m) -}}
+      {{- template "checkKeys" dict "where" $mwhere "m" $m "allowed" (coll.Slice "type" "name") -}}
+      {{- $mname := tmpl.Exec "get" (dict "m" $m "k" "name") -}}
+      {{- $mtype := tmpl.Exec "get" (dict "m" $m "k" "type") -}}
+      {{- test.Assert (printf "canvas: %s: 'name' is required" $mwhere) (ne $mname "") -}}
+      {{- test.Assert (printf "canvas: %s (%s): unknown type %q, expected one of %v" $mwhere $mname $mtype $messageTypes) (has $messageTypes $mtype) -}}
+      {{- $messages = $messages | coll.Append (dict "type" $mtype "name" $mname) -}}
+    {{- end -}}
+    {{- $out = $out | coll.Append (dict "collaborator" $collaborator "type" $type
+          "relationship" (tmpl.Exec "get" (dict "m" $c "k" "relationship")) "messages" $messages) -}}
+  {{- end -}}
+  {{- $collaborations = coll.Merge (dict $key $out) $collaborations -}}
+{{- end -}}
+
+{{- /* ===================== layout ===================== */ -}}
+
+{{- $W := 2000 -}}
+
+{{- /* Row 1: the name shrinks to fit next to the header box. */ -}}
+{{- $nameMax := 1060.0 -}}
+{{- $nameW := tmpl.Exec "textWidth" (dict "text" $name "s" (math.Mul 38 1.05)) | conv.ToFloat64 -}}
+{{- $nameSize := 38.0 -}}
+{{- if gt $nameW $nameMax }}{{ $nameSize = math.Max 18 (math.Floor (math.Div (math.Mul 38 $nameMax) $nameW)) }}{{ end -}}
+{{- $nameSquash := gt (math.Div (math.Mul $nameW $nameSize) 38) $nameMax -}}
+
+{{- /* Row 2: purpose, strategic classification, domain roles. */ -}}
+{{- $row2 := 95 -}}
+{{- $purposeLines := tmpl.Exec "wrap" (dict "text" $purpose "w" 830 "s" 22) | data.JSONArray -}}
+{{- $roles := tmpl.Exec "listLayout" (dict "items" $lists.domain_roles "w" 330 "s" 18 "lh" 24 "gap" 6) | data.JSON -}}
+{{- $row2H := math.Max 240 (math.Add 110 (math.Mul 30 (len $purposeLines))) (math.Add 120 $roles.h) -}}
+
+{{- /* Row 3: communication lanes and the centre column. */ -}}
+{{- $row3 := math.Add $row2 $row2H -}}
+{{- $lanes := dict }}{{ $row3H := 730 -}}
+{{- range $key := coll.Slice "inbound_communication" "outbound_communication" -}}
+  {{- $y := math.Add $row3 160 }}{{ $out := coll.Slice -}}
+  {{- range index $collaborations $key -}}
+    {{- $l := tmpl.Exec "laneLayout" . | data.JSON -}}
+    {{- $out = $out | coll.Append (coll.Merge (dict "y" $y) $l) -}}
+    {{- $y = math.Add $y $l.h 24 -}}
+  {{- end -}}
+  {{- $lanes = coll.Merge (dict $key $out) $lanes -}}
+  {{- $row3H = math.Max $row3H (math.Sub $y $row3) -}}
+{{- end -}}
+
+{{- $centerTop := math.Add $row3 30 -}}
+{{- $y := math.Add $centerTop 110 -}}
+{{- $terms := coll.Slice -}}
+{{- range $language -}}
+  {{- $t := tmpl.Exec "wrap" (dict "text" .term "w" 400 "s" 16 "bold" true) | data.JSONArray -}}
+  {{- $d := coll.Slice }}{{ if .definition }}{{ $d = tmpl.Exec "wrap" (dict "text" .definition "w" 400 "s" 15) | data.JSONArray }}{{ end -}}
+  {{- $h := math.Add 24 (math.Mul 20 (len $t)) (math.Mul 19 (len $d)) -}}
+  {{- $terms = $terms | coll.Append (dict "y" $y "h" $h "term" $t "def" $d) -}}
+  {{- $y = math.Add $y $h 10 -}}
+{{- end -}}
+{{- if not $terms }}{{ $y = math.Add $y 110 }}{{ end -}}
+{{- $decisionsTitle := math.Add $y 40 -}}
+{{- $y = math.Add $y 90 -}}
+{{- $decisions := coll.Slice -}}
+{{- range $lists.business_decisions -}}
+  {{- $l := tmpl.Exec "wrap" (dict "text" . "w" 396 "s" 15) | data.JSONArray -}}
+  {{- $h := math.Add 22 (math.Mul 19 (len $l)) -}}
+  {{- $decisions = $decisions | coll.Append (dict "y" $y "h" $h "lines" $l) -}}
+  {{- $y = math.Add $y $h 10 -}}
+{{- end -}}
+{{- if not $decisions }}{{ $y = math.Add $y 100 }}{{ end -}}
+{{- $centerH := math.Sub (math.Add $y 20) $centerTop -}}
+{{- $row3H = math.Max $row3H (math.Add $centerH 60) -}}
+
+{{- /* Row 4: assumptions, verification metrics, open questions. */ -}}
+{{- $row4 := math.Add $row3 $row3H -}}
+{{- $bottom := dict -}}
+{{- $row4H := 240 -}}
+{{- range $s := coll.Slice (dict "key" "assumptions" "w" 825) (dict "key" "verification_metrics" "w" 675) (dict "key" "open_questions" "w" 330) -}}
+  {{- $l := tmpl.Exec "listLayout" (dict "items" (index $lists $s.key) "w" $s.w "s" 20 "lh" 27 "gap" 8) | data.JSON -}}
+  {{- $bottom = coll.Merge (dict $s.key $l) $bottom -}}
+  {{- $row4H = math.Max $row4H (math.Add 120 $l.h) -}}
+{{- end -}}
+{{- $H := math.Add $row4 $row4H -}}
+
+<svg xmlns="http://www.w3.org/2000/svg" width="{{ $W }}" height="{{ $H }}" viewBox="0 0 {{ $W }} {{ $H }}">
+  <title>Bounded Context Canvas: {{ $name | html }}</title>
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; fill: #222; }
+    .title { font-size: 38px; font-weight: 700; fill: #111; }
+    .name { font-weight: 400; fill: #111; }
+    .meta { font-size: 20px; font-weight: 700; fill: #777; }
+    .column { font-size: 26px; font-weight: 700; fill: #aaa; }
+    .hint { font-size: 26px; fill: #aaa; text-anchor: middle; }
+    .purpose { font-size: 22px; }
+    .body { font-size: 20px; }
+    .body-sm { font-size: 18px; }
+    .label { font-size: 18px; font-weight: 700; fill: #666; }
+    .option { font-size: 18px; fill: #999; }
+    .option.selected { font-weight: 700; fill: #111; }
+    .center-title { font-size: 34px; font-weight: 700; fill: #111; text-anchor: middle; }
+    .center-sub { font-size: 18px; font-weight: 700; fill: #777; text-anchor: middle; }
+    .card { fill: #fff; stroke: #555; stroke-width: 2; }
+    .card-name { font-size: 18px; font-weight: 700; }
+    .card-detail { font-size: 14px; font-style: italic; fill: #666; }
+    .term { font-size: 16px; font-weight: 700; }
+    .definition, .decision-text { font-size: 15px; }
+    .sticky rect { stroke-width: 3; }
+    .sticky text { font-size: 14px; font-weight: 700; text-anchor: middle; }
+    .query rect { fill: #e4f5ae; stroke: #b6df7c; }
+    .command rect { fill: #cfe0f3; stroke: #84bdea; }
+    .event rect { fill: #fbf0b4; stroke: #f3d97a; }
+    .decision rect, rect.decision { fill: #e3d8ec; stroke: #ab7fcc; stroke-width: 3; }
+    .term-box { fill: #f3f3f3; stroke: #999; stroke-width: 1.5; stroke-dasharray: 6 4; }
+    .arrow { fill: #f0f0f0; stroke: #e2e2e2; }
+    .frame { fill: none; stroke: #111; stroke-width: 4; }
+  </style>
+  <rect width="{{ $W }}" height="{{ $H }}" fill="#fff"/>
+
+  <!-- Name -->
+  <rect x="1245" y="0" width="755" height="95" fill="#e5e5e5"/>
+  <text x="1262" y="34" class="meta">V5</text>
+  <text x="1290" y="70" class="meta">github.com/ddd-crew/bounded-context-canvas</text>
+  <g transform="translate(1815 30)">
+    <rect width="150" height="44" rx="6" fill="#aab2ab" stroke="#111" stroke-width="2"/>
+    <text x="75" y="30" text-anchor="middle" style="font-size:22px;font-weight:700;fill:#111">CC BY</text>
+  </g>
+  <text x="30" y="62" class="title">Name:</text>
+  <text x="160" y="62" class="name" style="font-size:{{ $nameSize }}px"{{ if $nameSquash }} textLength="{{ $nameMax }}" lengthAdjust="spacingAndGlyphs"{{ end }}>{{ $name | html }}</text>
+
+  <!-- Purpose -->
+  <text x="30" y="{{ math.Add $row2 50 }}" class="title">Purpose</text>
+{{- if $purposeLines }}
+  {{ template "text" dict "x" 30 "y" (math.Add $row2 100) "lh" 30 "lines" $purposeLines "class" "purpose" }}
+{{- else }}
+{{- template "hint" dict "x" 445 "y" (math.Add $row2 108) "lines" (coll.Slice "What benefits does this context provide," "and how does it provide them? Describe" "the purpose from a business perspective") }}
+{{- end }}
+
+  <!-- Strategic Classification -->
+  <text x="912" y="{{ math.Add $row2 50 }}" class="title">Strategic Classification</text>
+{{- range $col, $s := $strategic }}
+{{- $x := math.Add 935 (math.Mul 240 $col) }}
+  <text x="{{ $x }}" y="{{ math.Add $row2 92 }}" class="label">{{ $s.label }}</text>
+{{- range $i, $o := $s.options }}
+{{- $oy := math.Add $row2 122 (math.Mul 27 $i) }}
+{{- $sel := has (index $chosen $s.key) $o }}
+  <rect x="{{ $x }}" y="{{ math.Sub $oy 14 }}" width="15" height="15" rx="2" fill="{{ $sel | ternary "#111" "#fff" }}" stroke="{{ $sel | ternary "#111" "#aaa" }}" stroke-width="1.5"/>
+  <text x="{{ math.Add $x 24 }}" y="{{ $oy }}" class="option{{ if $sel }} selected{{ end }}">{{ $o }}</text>
+{{- end }}
+{{- end }}
+
+  <!-- Domain Roles -->
+  <text x="1645" y="{{ math.Add $row2 50 }}" class="title">Domain Roles</text>
+{{- if $roles.items }}
+{{- template "list" dict "layout" $roles "x" 1650 "y" (math.Add $row2 95) "lh" 24 "class" "body-sm" }}
+{{- else }}
+  <text x="1745" y="{{ math.Add $row2 88 }}" class="label">Role Types</text>
+{{- range $i, $r := coll.Slice "draft context" "execution context" "analysis context" "gateway context" "other" }}
+  <text x="1745" y="{{ math.Add $row2 116 (math.Mul 26 $i) }}" class="option">- {{ $r }}</text>
+{{- end }}
+{{- end }}
+
+  <!-- Inbound Communication -->
+{{- template "communication" dict "title" "Inbound Communication" "top" $row3 "x" 30 "arrowEnd" 735
+      "labels" (dict "collaborator" 40 "messages" 300) "cardX" 30 "msgX" 290 "placeholderX" 155
+      "lanes" $lanes.inbound_communication }}
+
+  <!-- Outbound Communication -->
+{{- template "communication" dict "title" "Outbound Communication" "top" $row3 "x" 1275 "arrowEnd" 1970
+      "labels" (dict "collaborator" 1750 "messages" 1285) "cardX" 1740 "msgX" 1275 "placeholderX" 1400
+      "lanes" $lanes.outbound_communication }}
+
+  <!-- Ubiquitous Language -->
+  <rect x="760" y="{{ $centerTop }}" width="480" height="{{ $centerH }}" fill="#fff" stroke="#777" stroke-width="3"/>
+  <text x="1000" y="{{ math.Add $centerTop 52 }}" class="center-title">Ubiquitous Language</text>
+  <text x="1000" y="{{ math.Add $centerTop 82 }}" class="center-sub">Context-specific domain terminology</text>
+{{- range $terms }}
+  <rect x="790" y="{{ .y }}" width="420" height="{{ .h }}" class="term-box"/>
+  {{ template "text" dict "x" 800 "y" (math.Add .y 24) "lh" 20 "lines" .term "class" "term" }}
+{{- if .def }}
+  {{ template "text" dict "x" 800 "y" (math.Add .y 24 (math.Mul 20 (len .term))) "lh" 19 "lines" .def "class" "definition" }}
+{{- end }}
+{{- end }}
+{{- if not $terms }}
+  <rect x="900" y="{{ math.Add $centerTop 115 }}" width="200" height="85" class="term-box"/>
+  <text x="908" y="{{ math.Add $centerTop 140 }}" class="term" style="font-size:14px">&lt;Domain Term&gt;</text>
+  <text x="908" y="{{ math.Add $centerTop 160 }}" class="definition" style="font-size:14px">&lt;definition&gt;</text>
+{{- end }}
+
+  <!-- Business Decisions -->
+  <text x="1000" y="{{ $decisionsTitle }}" class="center-title">Business Decisions</text>
+  <text x="1000" y="{{ math.Add $decisionsTitle 30 }}" class="center-sub">Key business rules, policies, and decisions</text>
+{{- range $decisions }}
+  <rect x="790" y="{{ .y }}" width="420" height="{{ .h }}" class="decision"/>
+  {{ template "text" dict "x" 802 "y" (math.Add .y 24) "lh" 19 "lines" .lines "class" "decision-text" }}
+{{- end }}
+{{- if not $decisions }}
+{{- template "sticky" dict "x" 932.5 "y" (math.Add $decisionsTitle 60) "h" 75 "type" "decision" "lines" (coll.Slice "<Decision>") }}
+{{- end }}
+
+  <!-- Assumptions -->
+  <text x="40" y="{{ math.Add $row4 50 }}" class="title">Assumptions</text>
+{{- if $bottom.assumptions.items }}
+{{- template "list" dict "layout" $bottom.assumptions "x" 40 "y" (math.Add $row4 95) "lh" 27 "class" "body" }}
+{{- else }}
+{{- template "hint" dict "x" 442 "y" (math.Add $row4 105) "lines" (coll.Slice "Describe which currently unverified assumptions went" "into this bounded context design. Make those" "assumptions explicit by documenting them here") }}
+{{- end }}
+
+  <!-- Verification Metrics -->
+  <text x="912" y="{{ math.Add $row4 50 }}" class="title">Verification Metrics</text>
+{{- if $bottom.verification_metrics.items }}
+{{- template "list" dict "layout" $bottom.verification_metrics "x" 915 "y" (math.Add $row4 95) "lh" 27 "class" "body" }}
+{{- else }}
+{{- template "hint" dict "x" 1252 "y" (math.Add $row4 105) "lines" (coll.Slice "Describe metrics which can be used to" "(in)validate the current structure of this bounded" "context?") }}
+{{- end }}
+
+  <!-- Open Questions -->
+  <text x="1645" y="{{ math.Add $row4 50 }}" class="title">Open Questions</text>
+{{- if $bottom.open_questions.items }}
+{{- template "list" dict "layout" $bottom.open_questions "x" 1645 "y" (math.Add $row4 95) "lh" 27 "class" "body" }}
+{{- end }}
+
+  <!-- Frame -->
+  <path class="frame" d="M 0 {{ $row2 }} H {{ $W }} M 0 {{ $row3 }} H {{ $W }} M 0 {{ $row4 }} H {{ $W }}
+    M 1245 0 V {{ $row2 }}
+    M 890 {{ $row2 }} V {{ $row3 }} M 1620 {{ $row2 }} V {{ $row3 }}
+    M 885 {{ $row4 }} V {{ $H }} M 1620 {{ $row4 }} V {{ $H }}"/>
+  <rect class="frame" x="2" y="2" width="{{ math.Sub $W 4 }}" height="{{ math.Sub $H 4 }}"/>
+</svg>
