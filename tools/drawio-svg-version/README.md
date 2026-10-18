@@ -2,14 +2,14 @@
 
 ![](bounded-context-canvas.drawio.svg.png)
 
-The *bounded context canvas* is described in [this blog post](https://medium.com/nick-tune-tech-strategy-blog/bounded-context-canvas-v2-simplifications-and-additions-229ed35f825f) by Nick Tune (highly recommended blog btw).
+The *bounded context canvas* and each of its sections are described in the [main README](../../README.md).
 
 ## Basic draw.io Usage
 
 - Checkout this repository
 - Head over to [draw.io](https://www.diagrams.net/) 
 - Click "Open Existing Diagram"
-- Select the `bounded-context-canvas-template.drawio.svg` template
+- Select the `bounded-context-canvas-template-drawio.svg` template
 - Make sure to have the "Content" layer activated and unlocked to fill your Canvas
 
 ## Advanced Usage / Optional Prerequisites
@@ -29,6 +29,6 @@ Doing so allows one to re-open the saved SVG file and update the filled in data.
 
 ## Bounded Context Canvas How to
 
-- Either continue from a canvas you already started or start from the `bounded-context-canvas-template.drawio.svg`.
+- Either continue from a canvas you already started or start from the `bounded-context-canvas-template-drawio.svg`.
 - Fill it in with your team.
 - Save the current file near the bounded context's code.
