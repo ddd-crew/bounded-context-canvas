@@ -1,0 +1,80 @@
+# yaml-language-server: $schema=../bounded-context-canvas.schema.json
+name: Payments
+purpose: >
+  Collect money from customers for their orders using the payment method they prefer,
+  and make sure every successful payment is reliably recorded so orders can be fulfilled
+  and finance can reconcile with payment providers.
+
+strategic_classification:
+  domain: supporting
+  business_model: [revenue, compliance]
+  evolution: product
+
+domain_roles:
+  - execution context
+  - gateway context
+
+inbound_communication:
+  - collaborator: Checkout
+    type: bounded context
+    relationship: customer/supplier
+    messages:
+      - { type: command, name: Authorize Payment }
+      - { type: query, name: Available Payment Methods }
+  - collaborator: Payment Service Provider
+    type: external system
+    relationship: anticorruption layer
+    messages:
+      - { type: event, name: Payment Captured }
+      - { type: event, name: Payment Failed }
+      - { type: event, name: Chargeback Received }
+      - { type: event, name: Refund Settled }
+  - collaborator: Customer Support Portal
+    type: frontend
+    messages:
+      - { type: command, name: Issue Refund }
+
+outbound_communication:
+  - collaborator: Payment Service Provider
+    type: external system
+    relationship: conformist
+    messages:
+      - { type: command, name: Create Payment Intent }
+      - { type: command, name: Refund Payment }
+  - collaborator: Order Fulfilment
+    type: bounded context
+    relationship: published language
+    messages:
+      - { type: event, name: Order Paid }
+  - collaborator: Finance
+    type: bounded context
+    messages:
+      - { type: event, name: Payment Settled }
+      - { type: event, name: Refund Issued }
+
+ubiquitous_language:
+  - term: Payment Intent
+    definition: The intention to collect a specific amount for one order, before the customer has authorized it.
+  - term: Authorization
+    definition: Funds reserved on the customer's payment method but not yet transferred.
+  - term: Capture
+    definition: Transfer of previously authorized funds to the merchant.
+  - term: Chargeback
+    definition: A payment reversed by the customer's bank after a dispute.
+
+business_decisions:
+  - Payments are captured only when the order ships; authorizations expire after 7 days.
+  - Refunds above 500 EUR require approval by a support lead.
+  - A failed capture is retried three times before the order is cancelled.
+
+assumptions:
+  - A single payment service provider is sufficient for all markets in the next 12 months.
+  - Customers never split one order across multiple payment methods.
+
+verification_metrics:
+  - Number of changes to this context that also require changes in Checkout.
+  - Share of refund requests that need manual intervention.
+
+open_questions:
+  - Who owns invoices, Payments or Finance?
+  - Do we need to support partial captures?

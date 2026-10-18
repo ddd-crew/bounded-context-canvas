@@ -1,0 +1,219 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="1414" viewBox="0 0 2000 1414">
+  <title>Bounded Context Canvas: Payments</title>
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; fill: #222; }
+    .title { font-size: 38px; font-weight: 700; fill: #111; }
+    .name { font-weight: 400; fill: #111; }
+    .meta { font-size: 20px; font-weight: 700; fill: #777; }
+    .column { font-size: 26px; font-weight: 700; fill: #aaa; }
+    .hint { font-size: 26px; fill: #aaa; text-anchor: middle; }
+    .purpose { font-size: 22px; }
+    .body { font-size: 20px; }
+    .body-sm { font-size: 18px; }
+    .label { font-size: 18px; font-weight: 700; fill: #666; }
+    .option { font-size: 18px; fill: #999; }
+    .option.selected { font-weight: 700; fill: #111; }
+    .center-title { font-size: 34px; font-weight: 700; fill: #111; text-anchor: middle; }
+    .center-sub { font-size: 18px; font-weight: 700; fill: #777; text-anchor: middle; }
+    .card { fill: #fff; stroke: #555; stroke-width: 2; }
+    .card-name { font-size: 18px; font-weight: 700; }
+    .card-detail { font-size: 14px; font-style: italic; fill: #666; }
+    .term { font-size: 16px; font-weight: 700; }
+    .definition, .decision-text { font-size: 15px; }
+    .sticky rect { stroke-width: 3; }
+    .sticky text { font-size: 14px; font-weight: 700; text-anchor: middle; }
+    .query rect { fill: #e4f5ae; stroke: #b6df7c; }
+    .command rect { fill: #cfe0f3; stroke: #84bdea; }
+    .event rect { fill: #fbf0b4; stroke: #f3d97a; }
+    .decision rect, rect.decision { fill: #e3d8ec; stroke: #ab7fcc; stroke-width: 3; }
+    .term-box { fill: #f3f3f3; stroke: #999; stroke-width: 1.5; stroke-dasharray: 6 4; }
+    .arrow { fill: #f0f0f0; stroke: #e2e2e2; }
+    .frame { fill: none; stroke: #111; stroke-width: 4; }
+  </style>
+  <rect width="2000" height="1414" fill="#fff"/>
+
+  <!-- Name -->
+  <rect x="1245" y="0" width="755" height="95" fill="#e5e5e5"/>
+  <text x="1262" y="34" class="meta">V5</text>
+  <text x="1290" y="70" class="meta">github.com/ddd-crew/bounded-context-canvas</text>
+  <g transform="translate(1815 30)">
+    <rect width="150" height="44" rx="6" fill="#aab2ab" stroke="#111" stroke-width="2"/>
+    <text x="75" y="30" text-anchor="middle" style="font-size:22px;font-weight:700;fill:#111">CC BY</text>
+  </g>
+  <text x="30" y="62" class="title">Name:</text>
+  <text x="160" y="62" class="name" style="font-size:38px">Payments</text>
+
+  <!-- Purpose -->
+  <text x="30" y="145" class="title">Purpose</text>
+  <text x="30" y="195" class="purpose"><tspan x="30" dy="0">Collect money from customers for their orders using the payment method they</tspan><tspan x="30" dy="30">prefer, and make sure every successful payment is reliably recorded so orders</tspan><tspan x="30" dy="30">can be fulfilled and finance can reconcile with payment providers.</tspan></text>
+
+  <!-- Strategic Classification -->
+  <text x="912" y="145" class="title">Strategic Classification</text>
+  <text x="935" y="187" class="label">Domain</text>
+  <rect x="935" y="203" width="15" height="15" rx="2" fill="#fff" stroke="#aaa" stroke-width="1.5"/>
+  <text x="959" y="217" class="option">core</text>
+  <rect x="935" y="230" width="15" height="15" rx="2" fill="#111" stroke="#111" stroke-width="1.5"/>
+  <text x="959" y="244" class="option selected">supporting</text>
+  <rect x="935" y="257" width="15" height="15" rx="2" fill="#fff" stroke="#aaa" stroke-width="1.5"/>
+  <text x="959" y="271" class="option">generic</text>
+  <rect x="935" y="284" width="15" height="15" rx="2" fill="#fff" stroke="#aaa" stroke-width="1.5"/>
+  <text x="959" y="298" class="option">other</text>
+  <text x="1175" y="187" class="label">Business Model</text>
+  <rect x="1175" y="203" width="15" height="15" rx="2" fill="#111" stroke="#111" stroke-width="1.5"/>
+  <text x="1199" y="217" class="option selected">revenue</text>
+  <rect x="1175" y="230" width="15" height="15" rx="2" fill="#fff" stroke="#aaa" stroke-width="1.5"/>
+  <text x="1199" y="244" class="option">engagement</text>
+  <rect x="1175" y="257" width="15" height="15" rx="2" fill="#111" stroke="#111" stroke-width="1.5"/>
+  <text x="1199" y="271" class="option selected">compliance</text>
+  <rect x="1175" y="284" width="15" height="15" rx="2" fill="#fff" stroke="#aaa" stroke-width="1.5"/>
+  <text x="1199" y="298" class="option">cost reduction</text>
+  <text x="1415" y="187" class="label">Evolution</text>
+  <rect x="1415" y="203" width="15" height="15" rx="2" fill="#fff" stroke="#aaa" stroke-width="1.5"/>
+  <text x="1439" y="217" class="option">genesis</text>
+  <rect x="1415" y="230" width="15" height="15" rx="2" fill="#fff" stroke="#aaa" stroke-width="1.5"/>
+  <text x="1439" y="244" class="option">custom built</text>
+  <rect x="1415" y="257" width="15" height="15" rx="2" fill="#111" stroke="#111" stroke-width="1.5"/>
+  <text x="1439" y="271" class="option selected">product</text>
+  <rect x="1415" y="284" width="15" height="15" rx="2" fill="#fff" stroke="#aaa" stroke-width="1.5"/>
+  <text x="1439" y="298" class="option">commodity</text>
+
+  <!-- Domain Roles -->
+  <text x="1645" y="145" class="title">Domain Roles</text>
+  <text x="1650" y="190" class="body-sm">•</text>
+  <text x="1670" y="190" class="body-sm"><tspan x="1670" dy="0">execution context</tspan></text>
+  <text x="1650" y="220" class="body-sm">•</text>
+  <text x="1670" y="220" class="body-sm"><tspan x="1670" dy="0">gateway context</tspan></text>
+
+  <!-- Inbound Communication -->
+  <text x="30" y="385" class="title">Inbound Communication</text>
+  <text x="40" y="437" class="column">Collaborator</text>
+  <text x="300" y="437" class="column">Messages</text>
+  <path class="arrow" d="M 30 453 H 690 V 445 L 735 462 L 690 479 V 471 H 30 Z"/>
+  <rect class="card" x="30" y="495" width="230" height="92" rx="4"/>
+  <text x="42" y="523" class="card-name"><tspan x="42" dy="0">Checkout</tspan></text>
+  <text x="42" y="545" class="card-detail"><tspan x="42" dy="0">bounded context</tspan><tspan x="42" dy="18">customer/supplier</tspan></text>
+  <g class="sticky command">
+    <rect x="290" y="495" width="135" height="70"/>
+    <text x="357.5" y="526.5" class=""><tspan x="357.5" dy="0">Authorize</tspan><tspan x="357.5" dy="17">Payment</tspan></text>
+  </g>
+  <g class="sticky query">
+    <rect x="435" y="495" width="135" height="75"/>
+    <text x="502.5" y="520.5" class=""><tspan x="502.5" dy="0">Available</tspan><tspan x="502.5" dy="17">Payment</tspan><tspan x="502.5" dy="17">Methods</tspan></text>
+  </g>
+  <rect class="card" x="30" y="611" width="230" height="114" rx="4"/>
+  <text x="42" y="639" class="card-name"><tspan x="42" dy="0">Payment Service</tspan><tspan x="42" dy="22">Provider</tspan></text>
+  <text x="42" y="683" class="card-detail"><tspan x="42" dy="0">external system</tspan><tspan x="42" dy="18">anticorruption layer</tspan></text>
+  <g class="sticky event">
+    <rect x="290" y="611" width="135" height="70"/>
+    <text x="357.5" y="642.5" class=""><tspan x="357.5" dy="0">Payment</tspan><tspan x="357.5" dy="17">Captured</tspan></text>
+  </g>
+  <g class="sticky event">
+    <rect x="435" y="611" width="135" height="70"/>
+    <text x="502.5" y="651" class=""><tspan x="502.5" dy="0">Payment Failed</tspan></text>
+  </g>
+  <g class="sticky event">
+    <rect x="580" y="611" width="135" height="70"/>
+    <text x="647.5" y="642.5" class=""><tspan x="647.5" dy="0">Chargeback</tspan><tspan x="647.5" dy="17">Received</tspan></text>
+  </g>
+  <g class="sticky event">
+    <rect x="290" y="691" width="135" height="70"/>
+    <text x="357.5" y="731" class=""><tspan x="357.5" dy="0">Refund Settled</tspan></text>
+  </g>
+  <rect class="card" x="30" y="785" width="230" height="96" rx="4"/>
+  <text x="42" y="813" class="card-name"><tspan x="42" dy="0">Customer Support</tspan><tspan x="42" dy="22">Portal</tspan></text>
+  <text x="42" y="857" class="card-detail"><tspan x="42" dy="0">frontend</tspan></text>
+  <g class="sticky command">
+    <rect x="290" y="785" width="135" height="70"/>
+    <text x="357.5" y="825" class=""><tspan x="357.5" dy="0">Issue Refund</tspan></text>
+  </g>
+
+  <!-- Outbound Communication -->
+  <text x="1275" y="385" class="title">Outbound Communication</text>
+  <text x="1750" y="437" class="column">Collaborator</text>
+  <text x="1285" y="437" class="column">Messages</text>
+  <path class="arrow" d="M 1275 453 H 1925 V 445 L 1970 462 L 1925 479 V 471 H 1275 Z"/>
+  <rect class="card" x="1740" y="495" width="230" height="114" rx="4"/>
+  <text x="1752" y="523" class="card-name"><tspan x="1752" dy="0">Payment Service</tspan><tspan x="1752" dy="22">Provider</tspan></text>
+  <text x="1752" y="567" class="card-detail"><tspan x="1752" dy="0">external system</tspan><tspan x="1752" dy="18">conformist</tspan></text>
+  <g class="sticky command">
+    <rect x="1275" y="495" width="135" height="70"/>
+    <text x="1342.5" y="526.5" class=""><tspan x="1342.5" dy="0">Create Payment</tspan><tspan x="1342.5" dy="17">Intent</tspan></text>
+  </g>
+  <g class="sticky command">
+    <rect x="1420" y="495" width="135" height="70"/>
+    <text x="1487.5" y="535" class=""><tspan x="1487.5" dy="0">Refund Payment</tspan></text>
+  </g>
+  <rect class="card" x="1740" y="633" width="230" height="92" rx="4"/>
+  <text x="1752" y="661" class="card-name"><tspan x="1752" dy="0">Order Fulfilment</tspan></text>
+  <text x="1752" y="683" class="card-detail"><tspan x="1752" dy="0">bounded context</tspan><tspan x="1752" dy="18">published language</tspan></text>
+  <g class="sticky event">
+    <rect x="1275" y="633" width="135" height="70"/>
+    <text x="1342.5" y="673" class=""><tspan x="1342.5" dy="0">Order Paid</tspan></text>
+  </g>
+  <rect class="card" x="1740" y="749" width="230" height="74" rx="4"/>
+  <text x="1752" y="777" class="card-name"><tspan x="1752" dy="0">Finance</tspan></text>
+  <text x="1752" y="799" class="card-detail"><tspan x="1752" dy="0">bounded context</tspan></text>
+  <g class="sticky event">
+    <rect x="1275" y="749" width="135" height="70"/>
+    <text x="1342.5" y="789" class=""><tspan x="1342.5" dy="0">Payment Settled</tspan></text>
+  </g>
+  <g class="sticky event">
+    <rect x="1420" y="749" width="135" height="70"/>
+    <text x="1487.5" y="789" class=""><tspan x="1487.5" dy="0">Refund Issued</tspan></text>
+  </g>
+
+  <!-- Ubiquitous Language -->
+  <rect x="760" y="365" width="480" height="779" fill="#fff" stroke="#777" stroke-width="3"/>
+  <text x="1000" y="417" class="center-title">Ubiquitous Language</text>
+  <text x="1000" y="447" class="center-sub">Context-specific domain terminology</text>
+  <rect x="790" y="475" width="420" height="82" class="term-box"/>
+  <text x="800" y="499" class="term"><tspan x="800" dy="0">Payment Intent</tspan></text>
+  <text x="800" y="519" class="definition"><tspan x="800" dy="0">The intention to collect a specific amount for one order,</tspan><tspan x="800" dy="19">before the customer has authorized it.</tspan></text>
+  <rect x="790" y="567" width="420" height="82" class="term-box"/>
+  <text x="800" y="591" class="term"><tspan x="800" dy="0">Authorization</tspan></text>
+  <text x="800" y="611" class="definition"><tspan x="800" dy="0">Funds reserved on the customer&#39;s payment method but</tspan><tspan x="800" dy="19">not yet transferred.</tspan></text>
+  <rect x="790" y="659" width="420" height="63" class="term-box"/>
+  <text x="800" y="683" class="term"><tspan x="800" dy="0">Capture</tspan></text>
+  <text x="800" y="703" class="definition"><tspan x="800" dy="0">Transfer of previously authorized funds to the merchant.</tspan></text>
+  <rect x="790" y="732" width="420" height="82" class="term-box"/>
+  <text x="800" y="756" class="term"><tspan x="800" dy="0">Chargeback</tspan></text>
+  <text x="800" y="776" class="definition"><tspan x="800" dy="0">A payment reversed by the customer&#39;s bank after a</tspan><tspan x="800" dy="19">dispute.</tspan></text>
+
+  <!-- Business Decisions -->
+  <text x="1000" y="864" class="center-title">Business Decisions</text>
+  <text x="1000" y="894" class="center-sub">Key business rules, policies, and decisions</text>
+  <rect x="790" y="914" width="420" height="60" class="decision"/>
+  <text x="802" y="938" class="decision-text"><tspan x="802" dy="0">Payments are captured only when the order ships;</tspan><tspan x="802" dy="19">authorizations expire after 7 days.</tspan></text>
+  <rect x="790" y="984" width="420" height="60" class="decision"/>
+  <text x="802" y="1008" class="decision-text"><tspan x="802" dy="0">Refunds above 500 EUR require approval by a support</tspan><tspan x="802" dy="19">lead.</tspan></text>
+  <rect x="790" y="1054" width="420" height="60" class="decision"/>
+  <text x="802" y="1078" class="decision-text"><tspan x="802" dy="0">A failed capture is retried three times before the order is</tspan><tspan x="802" dy="19">cancelled.</tspan></text>
+
+  <!-- Assumptions -->
+  <text x="40" y="1224" class="title">Assumptions</text>
+  <text x="40" y="1269" class="body">•</text>
+  <text x="60" y="1269" class="body"><tspan x="60" dy="0">A single payment service provider is sufficient for all markets in the next 12 months.</tspan></text>
+  <text x="40" y="1304" class="body">•</text>
+  <text x="60" y="1304" class="body"><tspan x="60" dy="0">Customers never split one order across multiple payment methods.</tspan></text>
+
+  <!-- Verification Metrics -->
+  <text x="912" y="1224" class="title">Verification Metrics</text>
+  <text x="915" y="1269" class="body">•</text>
+  <text x="935" y="1269" class="body"><tspan x="935" dy="0">Number of changes to this context that also require changes in</tspan><tspan x="935" dy="27">Checkout.</tspan></text>
+  <text x="915" y="1331" class="body">•</text>
+  <text x="935" y="1331" class="body"><tspan x="935" dy="0">Share of refund requests that need manual intervention.</tspan></text>
+
+  <!-- Open Questions -->
+  <text x="1645" y="1224" class="title">Open Questions</text>
+  <text x="1645" y="1269" class="body">•</text>
+  <text x="1665" y="1269" class="body"><tspan x="1665" dy="0">Who owns invoices, Payments</tspan><tspan x="1665" dy="27">or Finance?</tspan></text>
+  <text x="1645" y="1331" class="body">•</text>
+  <text x="1665" y="1331" class="body"><tspan x="1665" dy="0">Do we need to support partial</tspan><tspan x="1665" dy="27">captures?</tspan></text>
+
+  <!-- Frame -->
+  <path class="frame" d="M 0 95 H 2000 M 0 335 H 2000 M 0 1174 H 2000
+    M 1245 0 V 95
+    M 890 95 V 335 M 1620 95 V 335
+    M 885 1174 V 1414 M 1620 1174 V 1414"/>
+  <rect class="frame" x="2" y="2" width="1996" height="1410"/>
+</svg>

@@ -1,0 +1,298 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/ddd-crew/bounded-context-canvas/main/tools/yaml-version/bounded-context-canvas.schema.json",
+  "title": "Bounded Context Canvas (v5)",
+  "description": "Describes a single bounded context following the Bounded Context Canvas v5.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "name"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the bounded context."
+    },
+    "purpose": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "What benefits does this context provide, and how does it provide them? Describe the purpose from a business perspective."
+    },
+    "strategic_classification": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "domain": {
+          "description": "How important is this context to the success of your organisation?",
+          "anyOf": [
+            {
+              "enum": [
+                "core",
+                "supporting",
+                "generic",
+                "other"
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "core",
+                  "supporting",
+                  "generic",
+                  "other"
+                ]
+              },
+              "uniqueItems": true
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "business_model": {
+          "description": "What role does the context play in your business model?",
+          "anyOf": [
+            {
+              "enum": [
+                "revenue",
+                "engagement",
+                "compliance",
+                "cost reduction"
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "revenue",
+                  "engagement",
+                  "compliance",
+                  "cost reduction"
+                ]
+              },
+              "uniqueItems": true
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "evolution": {
+          "description": "How evolved is the concept (see Wardley Maps)?",
+          "anyOf": [
+            {
+              "enum": [
+                "genesis",
+                "custom built",
+                "product",
+                "commodity"
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "genesis",
+                  "custom built",
+                  "product",
+                  "commodity"
+                ]
+              },
+              "uniqueItems": true
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "domain_roles": {
+      "description": "Roles the context plays, e.g. draft context, execution context, analysis context, gateway context, or any other role.",
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/textList"
+        }
+      ]
+    },
+    "inbound_communication": {
+      "description": "Collaborations initiated by other collaborators.",
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/communication"
+        }
+      ]
+    },
+    "outbound_communication": {
+      "description": "Collaborations initiated by this context.",
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/communication"
+        }
+      ]
+    },
+    "ubiquitous_language": {
+      "description": "Context-specific domain terminology: a term with an optional definition, or just a term.",
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "term"
+                ],
+                "properties": {
+                  "term": {
+                    "type": "string"
+                  },
+                  "definition": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "business_decisions": {
+      "description": "Key business rules, policies, and decisions.",
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/textList"
+        }
+      ]
+    },
+    "assumptions": {
+      "description": "Currently unverified assumptions that went into this design.",
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/textList"
+        }
+      ]
+    },
+    "verification_metrics": {
+      "description": "Metrics which can be used to (in)validate the current boundaries of this context.",
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/textList"
+        }
+      ]
+    },
+    "open_questions": {
+      "description": "Questions no one could answer yet.",
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/textList"
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "textList": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "communication": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "collaborator"
+        ],
+        "properties": {
+          "collaborator": {
+            "type": "string",
+            "description": "Name of the collaborating context, frontend, or system."
+          },
+          "type": {
+            "description": "Kind of collaborator.",
+            "enum": [
+              "bounded context",
+              "frontend",
+              "user interaction",
+              "external system",
+              "other",
+              null
+            ]
+          },
+          "relationship": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Context mapping relationship, e.g. customer/supplier, conformist, anticorruption layer, open host service, published language, shared kernel, partnership."
+          },
+          "messages": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "type",
+                "name"
+              ],
+              "properties": {
+                "type": {
+                  "enum": [
+                    "command",
+                    "query",
+                    "event"
+                  ]
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

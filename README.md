@@ -146,6 +146,9 @@ A free and open source [online Bounded Context Canvas tool](https://dddtoolbox.c
 ### HTML Version
 A [HTML version of the canvas](tools/html-version/README.md) you can edit in a browser and version in source control alongside your code. Contributed by [Nelson da Costa](https://github.com/baruica).
 
+### YAML Version
+A [YAML version of the canvas](tools/yaml-version/README.md) that you keep in source control and render to SVG with [gomplate](https://docs.gomplate.ca).
+
 ### Miro Version
 A free [MiroHQ template](https://miro.com/miroverse/category/newly-added/the-bounded-context-canvas) of the Bounded Context Canvas.
 
